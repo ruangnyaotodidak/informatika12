@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFORMATIKA KELAS XII — MAS Diniyah Limo Jurai</title>
+    <style>
+        /* ============================================
+           KONFIGURASI MUDAH GANTI GAMBAR & VIDEO
+           Ganti URL di bagian JavaScript di bawah
+        ============================================ */
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --gold: #d4a574;
+            --light: #f8f9fa;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --white: #ffffff;
+            --shadow: 0 20px 60px rgba(0,0,0,0.08);
+            --shadow-hover: 0 30px 80px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 60px 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(233,69,96,0.08) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,165,116,0.06) 0%, transparent 70%);
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(3deg); }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            max-width: 1200px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .book-cover-wrapper {
+            display: flex;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .book-cover {
+            width: 320px;
+            height: 440px;
+            border-radius: 4px 16px 16px 4px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4), -5px 0 15px rgba(0,0,0,0.2);
+            transform: rotateY(-8deg) rotateX(2deg);
+            transition: var(--transition);
+            object-fit: cover;
+            border-left: 6px solid var(--gold);
+        }
+
+        .book-cover:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.03);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+        }
+
+        .hero-text {
+            color: var(--white);
+        }
+
+        .hero-text .badge {
+            display: inline-block;
+            background: rgba(233,69,96,0.15);
+            border: 1px solid rgba(233,69,96,0.3);
+            color: var(--highlight);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .hero-text h1 span {
+            color: var(--gold);
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 32px;
+            font-weight: 300;
+        }
+
+        .author-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 16px 24px;
+            border-radius: 60px;
+            backdrop-filter: blur(10px);
+            width: fit-content;
+        }
+
+        .author-photo {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+
+        .author-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .author-info p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 100px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--highlight);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            max-width: 650px;
+            margin-bottom: 50px;
+        }
+
+        /* DAFTAR PERTEMUAN */
+        .meetings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .meeting-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .meeting-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .meeting-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .meeting-card:hover::before {
+            width: 6px;
+            background: var(--highlight);
+        }
+
+        .meeting-card.uts {
+            border: 2px solid var(--gold);
+            background: linear-gradient(135deg, #fffdf7 0%, var(--white) 100%);
+        }
+
+        .meeting-card.uts::before {
+            background: var(--gold);
+        }
+
+        .meeting-card.uas {
+            border: 2px solid var(--highlight);
+            background: linear-gradient(135deg, #fff5f7 0%, var(--white) 100%);
+        }
+
+        .meeting-card.uas::before {
+            background: var(--highlight);
+        }
+
+        .meeting-card.diskusi {
+            border: 2px solid rgba(15,52,96,0.2);
+            background: linear-gradient(135deg, #f0f7ff 0%, var(--white) 100%);
+        }
+
+        .meeting-card.diskusi::before {
+            background: var(--accent);
+        }
+
+        .meeting-number {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .meeting-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .meeting-card p {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .meeting-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .meeting-link:hover {
+            color: var(--highlight);
+            gap: 12px;
+        }
+
+        .meeting-link svg {
+            width: 16px;
+            height: 16px;
+            transition: var(--transition);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .tag-uts { background: rgba(212,165,116,0.15); color: #b8860b; }
+        .tag-uas { background: rgba(233,69,96,0.1); color: var(--highlight); }
+        .tag-diskusi { background: rgba(15,52,96,0.1); color: var(--accent); }
+        .tag-materi { background: rgba(46,204,113,0.1); color: #27ae60; }
+
+        /* TOMBOL VIDEO */
+        .btn-video {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--highlight), #c0392b);
+            color: var(--white);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 12px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(233,69,96,0.3);
+        }
+
+        .btn-video:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(233,69,96,0.4);
+        }
+
+        .btn-video svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ISI BUKU / CONTENT SECTION */
+        .content-section {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .content-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .content-section h4 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 24px 0 12px;
+        }
+
+        .content-section p, .content-section li {
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.9;
+            margin-bottom: 12px;
+        }
+
+        .content-section ul, .content-section ol {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        .content-section li {
+            margin-bottom: 8px;
+        }
+
+        /* CODE BLOCK */
+        .code-block {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 24px 28px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .code-block .tag-html { color: #89b4fa; }
+        .code-block .attr { color: #f9e2af; }
+        .code-block .string { color: #a6e3a1; }
+        .code-block .comment { color: #6c7086; font-style: italic; }
+
+        /* TABLE */
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 24px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .comparison-table thead {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .comparison-table th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison-table td {
+            padding: 14px 20px;
+            font-size: 0.88rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            color: var(--text);
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .comparison-table tbody tr:hover {
+            background: rgba(15,52,96,0.04);
+        }
+
+        /* REFERENSI */
+        .ref-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ref-list li {
+            padding: 16px 20px;
+            background: var(--light);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            border-left: 3px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .ref-list li:hover {
+            background: rgba(15,52,96,0.06);
+            transform: translateX(4px);
+        }
+
+        .ref-list li strong {
+            color: var(--primary);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary);
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        footer h3 {
+            color: var(--white);
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .author-card {
+                margin: 0 auto;
+            }
+
+            .book-cover {
+                width: 240px;
+                height: 330px;
+            }
+
+            .meetings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 30px 24px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .comparison-table {
+                font-size: 0.8rem;
+            }
+
+            .comparison-table th, .comparison-table td {
+                padding: 10px 12px;
+            }
+        }
+
+        /* SCROLL ANIMATION */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* NAV STICKY */
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26,26,46,0.95);
+            backdrop-filter: blur(20px);
+            padding: 14px 30px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transform: translateY(-100%);
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .sticky-nav.show {
+            transform: translateY(0);
+        }
+
+        .sticky-nav .nav-title {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .sticky-nav .nav-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .sticky-nav .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* EXAMPLE BOX */
+        .example-box {
+            background: linear-gradient(135deg, #f0f7ff, #e8f4fd);
+            border: 1px solid rgba(15,52,96,0.1);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .example-box h5 {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .case-box {
+            background: linear-gradient(135deg, #fff8f0, #fff3e6);
+            border: 1px solid rgba(212,165,116,0.2);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .case-box h5 {
+            color: #b8860b;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .value-box {
+            background: linear-gradient(135deg, #f0fff4, #e6ffed);
+            border: 1px solid rgba(46,204,113,0.15);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .value-box h5 {
+            color: #27ae60;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        /* ============================================
+           PRINT CSS - Optimasi untuk Cetak/PDF
+           PERBAIKAN: Header tabel tetap putih di background gelap
+        ============================================ */
+        @media print {
+            /* Hide elements yang tidak perlu dicetak */
+            .sticky-nav,
+            .print-button,
+            .btn-video,
+            .hero::before,
+            .hero::after,
+            .meeting-link svg,
+            .btn-video svg {
+                display: none !important;
+            }
+
+            /* Reset background untuk hemat tinta - KECUALI header tabel */
+            * {
+                background: transparent !important;
+                color: #000 !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
+            }
+
+            /* Hero section */
+            .hero {
+                min-height: auto;
+                page-break-after: always;
+                padding: 20px 0;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr 2fr;
+                gap: 40px;
+            }
+
+            .book-cover {
+                width: 200px;
+                height: 280px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+                color: #000;
+            }
+
+            .hero-text .subtitle {
+                color: #333;
+            }
+
+            .author-card {
+                background: #f5f5f5 !important;
+                border: 1px solid #ddd;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* Sections */
+            section {
+                padding: 40px 0;
+                page-break-inside: avoid;
+            }
+
+            .content-section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+                margin-bottom: 30px;
+            }
+
+            /* ==========================================
+               PERBAIKAN TABEL - Header tetap putih di background gelap
+            ========================================== */
+            .comparison-table {
+                page-break-inside: auto;
+                font-size: 0.8rem;
+                border: 1px solid #ddd;
+            }
+
+            /* Header tabel - Background gelap, teks putih */
+            .comparison-table thead {
+                background: #1a1a2e !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                color: #ffffff !important;
+            }
+
+            .comparison-table thead th {
+                background: #1a1a2e !important;
+                color: #ffffff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 8px 12px;
+                border: 1px solid #1a1a2e;
+                font-weight: 600;
+            }
+
+            /* Body tabel */
+            .comparison-table tbody tr:nth-child(even) {
+                background: #f9f9f9 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .comparison-table tbody tr:nth-child(odd) {
+                background: #ffffff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .comparison-table td {
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                color: #000 !important;
+            }
+
+            /* Code blocks */
+            .code-block {
+                background: #f5f5f5 !important;
+                color: #333 !important;
+                border: 1px solid #ddd;
+                font-size: 0.75rem;
+                white-space: pre-wrap;
+                word-wrap: break-word;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .code-block .tag-html,
+            .code-block .attr,
+            .code-block .string,
+            .code-block .comment {
+                color: #333 !important;
+            }
+
+            /* Meeting cards */
+            .meeting-card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+                margin-bottom: 15px;
+            }
+
+            .meetings-grid {
+                display: block;
+            }
+
+            /* Boxes */
+            .example-box,
+            .case-box,
+            .value-box {
+                border: 1px solid #ddd;
+                background: #fafafa !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* Page breaks */
+            h2, h3 {
+                page-break-after: avoid;
+            }
+
+            /* Footer */
+            footer {
+                background: #1a1a2e !important;
+                color: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                page-break-before: avoid;
+            }
+
+            footer h3,
+            footer p {
+                color: #fff !important;
+            }
+
+            /* Links */
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+
+            a[href]:after {
+                content: none;
+            }
+
+            /* Hide meeting links in print */
+            .meeting-link {
+                display: none;
+            }
+
+            /* Show URL for important links */
+            .ref-list a:after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+                color: #666;
+            }
+
+            /* Page size */
+            @page {
+                size: A4;
+                margin: 2cm;
+            }
+
+            @page :first {
+                margin-top: 1cm;
+            }
+        }
+
+        /* TOMBOL PRINT FLOATING */
+        .print-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--highlight), #c0392b);
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(233,69,96,0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .print-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(233,69,96,0.5);
+        }
+
+        .print-button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .print-button svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        @media print {
+            .print-button {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .print-button {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 18px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- STICKY NAVIGATION (urutan disesuaikan: Isi Buku → Pertemuan → Referensi) -->
+<nav class="sticky-nav" id="stickyNav">
+    <span class="nav-title">📘 INFORMATIKA KELAS XII</span>
+    <div class="nav-links">
+        <a href="#isi-buku">Isi Buku</a>
+        <a href="#pertemuan">Pertemuan</a>
+        <a href="#referensi">Referensi</a>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="book-cover-wrapper">
+            <!-- ============================================
+                 GANTI COVER BUKU: Ubah src di bawah
+                 Nama file default: cover-buku.png
+            ============================================ -->
+            <img 
+                id="bookCover"
+                src="cover-buku.png" 
+                alt="Cover Buku Informatika Kelas XII" 
+                class="book-cover"
+                onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjQ0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzIwIiBoZWlnaHQ9IjQ0MCIgZmlsbD0iIzFhMWEyZSIvPjx0ZXh0IHg9IjUwJSIgeT0iNDAlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iI2Q0YTU3NCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SU5GT1JNQVRJS0E8L3RleHQ+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iYm9sZCI+S0VMQVMgWElJPC90ZXh0Pjx0ZXh0IHg9IjUwJSIgeT0iNjUlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzg4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TUFTIERJTElZQUg8L3RleHQ+PHRleHQgeD0iNTAlIiB5PSI3MiUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjODg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5MSU1PIEpVUkFJPC90ZXh0Pjwvc3ZnPg=='"
+            >
+        </div>
+        <div class="hero-text">
+            <span class="badge">Tahun Ajaran 2026/2027</span>
+            <h1>INFORMATIKA<br><span>KELAS XII</span></h1>
+            <p class="subtitle">Algoritma, Berpikir Komputasional & Desain Web HTML<br>untuk Generasi Cerdas Berakhlak Mulia</p>
+            <div class="author-card">
+                <!-- ============================================
+                     GANTI FOTO PENULIS: Ubah src di bawah
+                     Nama file default: photo-penulis.jpg
+                ============================================ -->
+                <img 
+                    id="authorPhoto"
+                    src="photo-penulis.jpg" 
+                    alt="Jefri, S.Pd" 
+                    class="author-photo"
+                    onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTIiIGhlaWdodD0iNTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjYiIGN5PSIyNiIgcj0iMjYiIGZpbGw9IiMwZjM0NjAiLz48dGV4dCB4PSI1MCUiIHk9IjU1JSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPko8L3RleHQ+PC9zdmc+'"
+                >
+                <div class="author-info">
+                    <h4>JEFRI, S.Pd</h4>
+                    <p>MAS Diniyah Limo Jurai</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     ISI BUKU LENGKAP (MUNCUL PERTAMA)
+============================================ -->
+<section id="isi-buku" style="background: var(--white);">
+    <div class="container">
+        <span class="section-label">Jabaran Materi</span>
+        <h2 class="section-title">Isi Buku Lengkap</h2>
+        <p class="section-desc">Pembahasan mendalam setiap topik dengan contoh nyata, studi kasus, tabel perbandingan, dan penerapan nilai karakter Islami.</p>
+
+        <!-- BAGIAN 1 -->
+        <div class="content-section fade-up">
+            <h3>📘 BAB 1: Konsep Dasar Algoritma</h3>
+
+            <h4>A. Pengertian Algoritma</h4>
+            <p>Algoritma adalah serangkaian <strong>langkah-langkah logis, sistematis, dan terurut</strong> yang dirancang untuk menyelesaikan suatu masalah tertentu. Konsep ini pertama kali diperkenalkan oleh matematikawan Persia, <strong>Muhammad ibn Musa al-Khawarizmi</strong> (780–850 M), yang karyanya <em>"Al-Kitab al-Mukhtasar fi Hisab al-Jabr wal-Muqabala"</em> menjadi fondasi ilmu aljabar dan komputasi modern. Kata "algoritma" sendiri berasal dari latinisasi namanya: <em>Algoritmi</em>.</p>
+
+            <p>Dalam konteks Informatika Kelas XII, algoritma bukan sekadar urutan instruksi untuk komputer. Algoritma adalah <strong>cara berpikir terstruktur</strong> yang dapat diterapkan dalam kehidupan sehari-hari: mulai dari merencanakan perjalanan, memasak resep makanan, hingga menyelesaikan masalah sosial di lingkungan madrasah. Seorang siswa yang mampu menyusun algoritma dengan baik akan memiliki kemampuan problem-solving yang unggul di berbagai bidang kehidupan.</p>
+
+            <p>Syarat sebuah algoritma yang baik:</p>
+            <ul>
+                <li><strong>Jelas (Unambiguous):</strong> Setiap langkah tidak menimbulkan makna ganda. Pembaca atau pelaksana harus memahami dengan tepat apa yang harus dilakukan.</li>
+                <li><strong>Terbatas (Finite):</strong> Algoritma harus berhenti dalam jumlah langkah tertentu. Tidak boleh ada perulangan tanpa akhir (infinite loop).</li>
+                <li><strong>Dapat Dijalankan (Executable):</strong> Setiap langkah harus realistis dan bisa dilaksanakan dengan sumber daya yang tersedia.</li>
+            </ul>
+
+            <div class="example-box">
+                <h5>💡 Contoh: Algoritma Membuat Teh Manis</h5>
+                <ol>
+                    <li>Siapkan gelas bersih di atas meja</li>
+				<li>Masukkan 1-2 sendok makan gula pasir dan 1 kantong teh celup ke dalam gelas</li>
+                <li>Tuangkan air panas ke dalam gelas (±200 ml)</li>
+				<li>Aduk perlahan hingga gula larut sepenuhnya dan warna teh berubah menjadi kemerahan</li>
+                <li>Angkat kantong teh dan buang</li>
+                <li>Teh manis siap disajikan</li>
+                </ol>
+                <p style="margin-top:10px; font-size:0.85rem; color:var(--text-light);">Perhatikan: setiap langkah jelas, urutannya logis, ada awal dan akhir yang pasti, dan siapapun yang membaca dapat melaksanakannya.</p>
+            </div>
+
+            <h4>Sifat-Sifat Algoritma (5 Fundamental)</h4>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Sifat</th>
+                        <th>Penjelasan</th>
+                        <th>Contoh Konkret</th>
+                        <th>Kesalahan Umum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Ada Input</strong></td>
+                        <td>Masukan/data yang dibutuhkan sebelum proses dimulai. Bisa berupa angka, teks, atau kondisi awal.</td>
+                        <td>Untuk menghitung luas persegi panjang, input-nya adalah panjang dan lebar.</td>
+                        <td>Langsung menghitung tanpa mengetahui data yang diperlukan.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Ada Output</strong></td>
+                        <td>Hasil yang diharapkan setelah semua langkah selesai dieksekusi.</td>
+                        <td>Output: nilai luas = panjang × lebar (misal: 50 cm²).</td>
+                        <td>Proses berjalan tanpa menghasilkan apapun yang berguna.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Jelas (Definiteness)</strong></td>
+                        <td>Setiap instruksi harus spesifik, tidak ambigu, dan hanya memiliki satu interpretasi.</td>
+                        <td>"Panaskan air hingga 100°C" bukan "panaskan air sampai panas".</td>
+                        <td>"Tambahkan sedikit gula" → berapa "sedikit"? Tidak terukur.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Terbatas (Finiteness)</strong></td>
+                        <td>Algoritma harus memiliki titik akhir. Berhenti setelah sejumlah langkah tertentu.</td>
+                        <td>Loop "ulangi 10 kali" memiliki batas jelas, bukan "ulangi terus".</td>
+                        <td>Perulangan tanpa kondisi berhenti → program hang/tidak selesai.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Efektif (Effectiveness)</strong></td>
+                        <td>Setiap langkah harus bisa dilaksanakan dan memberikan kontribusi nyata menuju solusi.</td>
+                        <td>"Bagi 10 dengan 3" → efektif. "Bagi 10 dengan 0" → tidak efektif (error).</td>
+                        <td>Langkah yang mustahil dilakukan atau tidak relevan dengan tujuan.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="case-box">
+                <h5>📋 Studi Kasus: Algoritma Pendaftaran Siswa Baru di Madrasah</h5>
+                <p><strong>Masalah:</strong> MAS Diniyah Limo Jurai membutuhkan alur pendaftaran yang jelas untuk calon siswa baru tahun ajaran 2026/2027.</p>
+                <p><strong>Input:</strong> Nama lengkap, NISN, asal sekolah (MTs/SMP), nilai rapor, foto 3×4, fotokopi KK, surat keterangan sehat.</p>
+                <p><strong>Algoritma:</strong></p>
+                <ol>
+                    <li>Calon siswa mengambil formulir di ruang TU</li>
+                    <li>Mengisi formulir dengan data lengkap dan benar</li>
+                    <li>Melampirkan seluruh dokumen persyaratan</li>
+                    <li>Menyerahkan berkas ke panitia pendaftaran</li>
+                    <li>Panitia memverifikasi kelengkapan dokumen</li>
+                    <li>Jika lengkap → lanjut ke tahap tes; Jika tidak → kembalikan untuk dilengkapi</li>
+                    <li>Calon siswa mengikuti tes wawancara dan baca tulis Al-Qur'an</li>
+                    <li>Panitia mengumumkan hasil seleksi dalam 7 hari kerja</li>
+                    <li>Siswa yang diterima melakukan daftar ulang dan pembayaran</li>
+                </ol>
+                <p><strong>Output:</strong> Status penerimaan (diterima/tidak) dan jadwal orientasi siswa baru.
+				<br><br><br>
+				</p>
+				
+            </div>
+
+            <h4>B. Berpikir Komputasional & Nilai Karakter</h4>
+            <p>Berpikir komputasional (<em>Computational Thinking</em>) adalah pendekatan pemecahan masalah yang mengadopsi cara kerja ilmuwan komputer. Konsep ini dipopulerkan oleh <strong>Jeannette Wing</strong> (Carnegie Mellon University, 2006) dan kini menjadi kompetensi fundamental abad ke-21. Dalam konteks madrasah, berpikir komputasional diintegrasikan dengan penanaman nilai-nilai karakter Islami.</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Tahap</th>
+                        <th>Definisi</th>
+                        <th>Contoh Penerapan</th>
+                        <th>Nilai Karakter</th>
+                        <th>Dalil/Referensi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Dekomposisi</strong></td>
+                        <td>Memecah masalah besar menjadi bagian-bagian kecil yang lebih mudah dikelola</td>
+                        <td>Membagi proyek web menjadi: header, navigasi, konten, footer</td>
+                        <td>Kesabaran & Ketelitian</td>
+                        <td>"Sesungguhnya bersama kesulitan ada kemudahan" (QS. Al-Insyirah: 6)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pengenalan Pola</strong></td>
+                        <td>Mencari kesamaan, tren, atau keteraturan dalam masalah</td>
+                        <td>Menyadari bahwa semua halaman HTML memiliki struktur head-body yang sama</td>
+                        <td>Kepekaan & Berbagi Pengalaman</td>
+                        <td>"Sebaik-baik manusia adalah yang paling bermanfaat bagi orang lain" (HR. Ahmad)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Abstraksi</strong></td>
+                        <td>Fokus pada informasi penting, mengabaikan detail yang tidak relevan</td>
+                        <td>Saat membuat profil madrasah, fokus pada visi-misi, bukan warna cat dinding</td>
+                        <td>Kejujuran & Prioritas</td>
+                        <td>"Tinggalkanlah apa yang meragukanmu" (HR. Tirmidzi)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Perancangan Algoritma</strong></td>
+                        <td>Menyusun langkah-langkah solusi secara terstruktur dan logis</td>
+                        <td>Menulis urutan tag HTML dari DOCTYPE hingga closing html</td>
+                        <td>Kreativitas & Kepedulian</td>
+                        <td>"Allah mencintai jika seseorang melakukan pekerjaan, ia melakukannya dengan itqan (profesional)" (HR. Baihaqi)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="example-box">
+                <h5>💡 Contoh Dekomposisi: Merencanakan Acara Maulid Nabi di Madrasah</h5>
+                <p><strong>Masalah besar:</strong> Mengadakan peringatan Maulid Nabi ﷺ untuk 300 siswa.</p>
+                <p><strong>Dekomposisi menjadi sub-masalah:</strong></p>
+                <ul>
+                    <li><strong>Sub 1 - Kepanitiaan:</strong> Menentukan ketua, sekretaris, bendahara, seksi acara, konsumsi, dokumentasi</li>
+                    <li><strong>Sub 2 - Tempat & Waktu:</strong> Memesan aula, menentukan tanggal, mengatur layout kursi</li>
+                    <li><strong>Sub 3 - Acara:</strong> Menyusun rundown: pembukaan, tilawah, ceramah, shalawatan, doa, penutup</li>
+                    <li><strong>Sub 4 - Konsumsi:</strong> Menghitung kebutuhan snack 300 orang, memilih menu halal, mengatur distribusi</li>
+                    <li><strong>Sub 5 - Dokumentasi:</strong> Menyiapkan kamera, menentukan angle, membuat laporan foto/video</li>
+                </ul>
+				<br><br><br><br>
+            </div>
+
+            <h4>C. Cara Menyajikan Algoritma</h4>
+            <p>Algoritma dapat disajikan dalam tiga bentuk utama, masing-masing dengan kelebihan dan konteks penggunaan yang berbeda:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Metode</th>
+                        <th>Bentuk</th>
+                        <th>Kelebihan</th>
+                        <th>Kekurangan</th>
+                        <th>Kapan Digunakan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Teks Deskripsi</strong></td>
+                        <td>Kalimat bahasa alami (Indonesia/Inggris) yang terstruktur</td>
+                        <td>Mudah dipahami semua orang, tidak perlu keahlian khusus</td>
+                        <td>Bisa ambigu untuk masalah kompleks, panjang</td>
+                        <td>Dokumentasi awal, penjelasan untuk non-programmer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bagan Alir (Flowchart)</strong></td>
+                        <td>Diagram dengan simbol standar ISO/ANSI</td>
+                        <td>Visual, mudah melihat alur logika, universal</td>
+                        <td>Makan tempat untuk algoritma panjang, sulit dimodifikasi</td>
+                        <td>Presentasi, analisis sistem, dokumentasi teknis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pseudokode</strong></td>
+                        <td>Campuran bahasa alami dan struktur pemrograman</td>
+                        <td>Dekat dengan kode nyata, ringkas, mudah dikonversi</td>
+                        <td>Butuh pemahaman dasar pemrograman</td>
+                        <td>Perancangan sebelum coding, kompetisi programming</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Simbol Flowchart Standar:</strong></p>
+            <ul>
+                <li><strong>Oval (⬭):</strong> Mulai/Selesai (Start/End)</li>
+                <li><strong>Persegi Panjang (▭):</strong> Proses/Instruksi</li>
+                <li><strong>Belah Ketupat (◇):</strong> Keputusan/Percabangan (Ya/Tidak)</li>
+                <li><strong>Jajar Genjang (▱):</strong> Input/Output data</li>
+                <li><strong>Panah (→):</strong> Arah aliran proses</li>
+            </ul>
+
+            <div class="example-box">
+                <h5>💡 Contoh Pseudokode: Menentukan Kelulusan Siswa</h5>
+                <div class="code-block">
+<span class="comment">// Algoritma Kelulusan Siswa MAS Diniyah Limo Jurai</span>
+MULAI
+    INPUT nama_siswa
+    INPUT nilai_rata_rata
+    INPUT kehadiran_persen
+    
+    JIKA nilai_rata_rata >= 75 DAN kehadiran_persen >= 80 MAKA
+        TAMPILKAN nama_siswa + " dinyatakan LULUS. Masya Allah!"
+    LAINNYA JIKA nilai_rata_rata >= 75 DAN kehadiran_persen < 80 MAKA
+        TAMPILKAN nama_siswa + " perlu meningkatkan kehadiran."
+    LAINNYA
+        TAMPILKAN nama_siswa + " perlu remedial. Tetap semangat!"
+    AKHIR JIKA
+SELESAI
+                </div>
+            </div>
+
+            <div class="value-box">
+                <h5>🌿 Nilai Karakter yang Ditanamkan</h5>
+                <p>Menyusun algoritma mengajarkan siswa untuk <strong>tidak terburu-buru</strong> dalam menyelesaikan masalah. Sebagaimana Rasulullah ﷺ bersabda: <em>"Sesungguhnya Allah itu Maha Lembut dan mencintai kelembutan dalam segala urusan"</em> (HR. Bukhari & Muslim). Algoritma melatih kita untuk sabar mengurai masalah satu per satu, teliti dalam setiap langkah, dan bertanggung jawab atas solusi yang kita rancang.</p>
+            </div>
+        </div>
+
+        <!-- BAGIAN 2 -->
+        <div class="content-section fade-up">
+            <h3>📗 BAB 2: Penerapan ke Desain Web dengan HTML</h3>
+
+            <h4>A. Pengenalan Web & HTML</h4>
+            <p><strong>World Wide Web (WWW)</strong> diciptakan oleh <strong>Tim Berners-Lee</strong> pada tahun 1989 di CERN, Jenewa, Swiss. Awalnya dirancang untuk memudahkan pertukaran dokumen antar ilmuwan, kini web telah menjadi medium informasi terbesar di dunia dengan lebih dari 1,9 miliar website aktif (data Statista, 2025).</p>
+
+            <p><strong>HTML (HyperText Markup Language)</strong> adalah bahasa penanda (<em>markup language</em>) standar untuk menyusun struktur halaman web. HTML bukan bahasa pemrograman — ia tidak memiliki logika percabangan atau perulangan. HTML berfungsi sebagai <strong>"kerangka" atau "tulang punggung"</strong> sebuah situs web, mendefinisikan apa yang ditampilkan dan bagaimana kontennya terstruktur.</p>
+
+            <p>Versi terkini adalah <strong>HTML5</strong> (direkomendasikan W3C sejak 2014, terus diperbarui oleh WHATWG). HTML5 memperkenalkan elemen semantik, dukungan multimedia native, dan API modern yang membuat pengembangan web lebih powerful dan accessible.</p>
+
+            <div class="case-box">
+                <h5>📋 Prinsip Belajar Web di Madrasah</h5>
+                <p>Di MAS Diniyah Limo Jurai, belajar HTML bukan sekadar keterampilan teknis. Setiap halaman yang dibuat harus memenuhi prinsip:</p>
+                <ul>
+                    <li><strong>Bermanfaat:</strong> Konten memberikan ilmu, inspirasi, atau kemudahan bagi pembaca</li>
+                    <li><strong>Mudah Diakses:</strong> Semua orang bisa membaca, termasuk penyandang disabilitas (alt text, kontras warna)</li>
+                    <li><strong>Sopan & Santun:</strong> Bahasa yang digunakan menghormati pembaca, tidak provokatif</li>
+                    <li><strong>Menyebarkan Kebaikan:</strong> Konten mengajak pada hal positif, ilmu yang bermanfaat, dan akhlak mulia</li>
+                </ul>
+            </div>
+
+            <h4>B. Struktur Dasar Dokumen HTML</h4>
+            <p>Setiap dokumen HTML yang valid harus mengikuti struktur hierarkis berikut:</p>
+
+            <div class="code-block">
+<span class="tag-html">&lt;!DOCTYPE html&gt;</span>
+<span class="tag-html">&lt;html</span> <span class="attr">lang</span>=<span class="string">"id"</span><span class="tag-html">&gt;</span>
+<span class="tag-html">&lt;head&gt;</span>
+    <span class="tag-html">&lt;meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span><span class="tag-html">&gt;</span>
+    <span class="tag-html">&lt;meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span><span class="tag-html">&gt;</span>
+    <span class="tag-html">&lt;title&gt;</span>Halaman Pertamaku<span class="tag-html">&lt;/title&gt;</span>
+<span class="tag-html">&lt;/head&gt;</span>
+<span class="tag-html">&lt;body&gt;</span>
+    <span class="tag-html">&lt;h1&gt;</span>Selamat Datang<span class="tag-html">&lt;/h1&gt;</span>
+    <span class="tag-html">&lt;p&gt;</span>Mari belajar dengan semangat dan niat ibadah!<span class="tag-html">&lt;/p&gt;</span>
+<span class="tag-html">&lt;/body&gt;</span>
+<span class="tag-html">&lt;/html&gt;</span>
+            </div>
+
+            <p><strong>Penjelasan setiap komponen:</strong></p>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Komponen</th>
+                        <th>Fungsi</th>
+                        <th>Analogi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>&lt;!DOCTYPE html&gt;</code></td>
+                        <td>Deklarasi tipe dokumen, memberi tahu browser bahwa ini HTML5</td>
+                        <td>Cap "RESMI" di atas surat — menyatakan dokumen ini sah</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;html lang="id"&gt;</code></td>
+                        <td>Elemen root, pembungkus seluruh dokumen. Atribut lang menentukan bahasa</td>
+                        <td>Amplop surat yang membungkus seluruh isi</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;head&gt;</code></td>
+                        <td>Metadata: judul tab, encoding karakter, viewport, link CSS</td>
+                        <td>Kop surat: informasi pengirim, tanggal, perihal (tidak dibaca isi)</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;title&gt;</code></td>
+                        <td>Judul yang muncul di tab browser dan hasil pencarian Google</td>
+                        <td>Judul di kop surat</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;body&gt;</code></td>
+                        <td>Seluruh konten yang VISIBLE/terlihat di layar browser</td>
+                        <td>Isi surat yang dibaca penerima</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>C. Elemen & Tag Penting HTML</h4>
+
+            <p><strong>1. Tag Judul & Teks:</strong></p>
+            <ul>
+                <li><code>&lt;h1&gt;</code> sampai <code>&lt;h6&gt;</code>: Hierarki judul dari terbesar (h1) ke terkecil (h6). Gunakan h1 hanya sekali per halaman untuk SEO.</li>
+                <li><code>&lt;p&gt;</code>: Paragraf. Browser otomatis memberi jarak atas-bawah.</li>
+                <li><code>&lt;strong&gt;</code>: Teks penting/tebal (semantik: penekanan kuat). Berbeda dengan <code>&lt;b&gt;</code> yang hanya visual.</li>
+                <li><code>&lt;em&gt;</code>: Teks ditekankan/miring (semantik: penekanan). Berbeda dengan <code>&lt;i&gt;</code> yang hanya visual.</li>
+                <li><code>&lt;br&gt;</code>: Pindah baris tanpa membuat paragraf baru (self-closing tag).</li>
+                <li><code>&lt;hr&gt;</code>: Garis horizontal pemisah antar bagian konten.</li>
+            </ul>
+
+            <p><strong>2. Daftar (Lists):</strong></p>
+            <div class="code-block">
+<span class="comment">&lt;!-- Daftar Tak Berurutan (Unordered List) --&gt;</span>
+<span class="tag-html">&lt;ul&gt;</span>
+    <span class="tag-html">&lt;li&gt;</span>Rukun Islam: Syahadat<span class="tag-html">&lt;/li&gt;</span>
+    <span class="tag-html">&lt;li&gt;</span>Rukun Islam: Shalat<span class="tag-html">&lt;/li&gt;</span>
+    <span class="tag-html">&lt;li&gt;</span>Rukun Islam: Zakat<span class="tag-html">&lt;/li&gt;</span>
+    <span class="tag-html">&lt;li&gt;</span>Rukun Islam: Puasa<span class="tag-html">&lt;/li&gt;</span>
+    <span class="tag-html">&lt;li&gt;</span>Rukun Islam: Haji<span class="tag-html">&lt;/li&gt;</span>
+<span class="tag-html">&lt;/ul&gt;</span>
+
+<span class="comment">&lt;!-- Daftar Berurutan (Ordered List) --&gt;</span>
+<span class="tag-html">&lt;ol&gt;</span>
+    <span class="tag-html">&lt;li&gt;</span>Buka editor kode (VS Code)<span class="tag-html">&lt;/li&gt;</span>
+    <span class="tag-html">&lt;li&gt;</span>Buat file baru: index.html<span class="tag-html">&lt;/li&gt;</span>
+    <span class="tag-html">&lt;li&gt;</span>Tulis struktur dasar HTML<span class="tag-html">&lt;/li&gt;</span>
+    <span class="tag-html">&lt;li&gt;</span>Simpan dan buka di browser<span class="tag-html">&lt;/li&gt;</span>
+<span class="tag-html">&lt;/ol&gt;</span>
+            </div>
+
+            <p><strong>3. Tautan & Gambar:</strong></p>
+            <div class="code-block">
+<span class="comment">&lt;!-- Tautan/Hyperlink --&gt;</span>
+<span class="tag-html">&lt;a</span> <span class="attr">href</span>=<span class="string">"https://masdinilimojurai.sch.id"</span> <span class="attr">target</span>=<span class="string">"_blank"</span><span class="tag-html">&gt;</span>
+    Kunjungi Website Madrasah
+<span class="tag-html">&lt;/a&gt;</span>
+
+<span class="comment">&lt;!-- Gambar dengan Alt Text (WAJIB untuk aksesibilitas) --&gt;</span>
+<span class="tag-html">&lt;img</span> 
+    <span class="attr">src</span>=<span class="string">"foto-madrasah.jpg"</span> 
+    <span class="attr">alt</span>=<span class="string">"Gedung utama MAS Diniyah Limo Jurai Sungai Pua"</span>
+    <span class="attr">width</span>=<span class="string">"600"</span>
+<span class="tag-html">&gt;</span>
+            </div>
+
+            <div class="value-box">
+                <h5>🌿 Nilai: Aksesibilitas sebagai Bentuk Kebaikan</h5>
+                <p>Selalu cantumkan atribut <code>alt</code> pada gambar. Mengapa? Karena ada saudara kita yang menggunakan <em>screen reader</em> (pembaca layar) karena keterbatasan penglihatan. Dengan alt text, mereka tetap bisa "membaca" gambar melalui deskripsi audio. Alt text berfungsi sebagai pengganti visual. Saat screen reader mendeteksi gambar, program akan membacakan teks alt tersebut menjadi suara. Ini adalah bentuk <strong>kepedulian </strong> terhadap sesama — memastikan ilmu dan informasi bisa dinikmati semua orang tanpa terkecuali.</p>
+				
+			</div>
+<br><br><br>
+            <p><strong>4. Elemen Semantik HTML5:</strong></p>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Elemen</th>
+                        <th>Fungsi</th>
+                        <th>Contoh Penggunaan</th>
+                        <th>Pengganti Lama (Non-Semantik)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>&lt;header&gt;</code></td>
+                        <td>Bagian kepala halaman/section</td>
+                        <td>Logo madrasah + nama + motto</td>
+                        <td><code>&lt;div class="header"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;nav&gt;</code></td>
+                        <td>Menu navigasi utama</td>
+                        <td>Link: Beranda, Profil, Kurikulum, Kontak</td>
+                        <td><code>&lt;div class="menu"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;main&gt;</code></td>
+                        <td>Konten utama halaman (unik, hanya 1 per halaman)</td>
+                        <td>Isi artikel, materi pelajaran</td>
+                        <td><code>&lt;div class="content"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;section&gt;</code></td>
+                        <td>Kelompok konten bertema sama</td>
+                        <td>Section "Visi Misi", section "Galeri"</td>
+                        <td><code>&lt;div class="section"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;article&gt;</code></td>
+                        <td>Konten mandiri yang bisa berdiri sendiri</td>
+                        <td>Postingan blog, berita madrasah</td>
+                        <td><code>&lt;div class="post"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;footer&gt;</code></td>
+                        <td>Bagian bawah/penutup</td>
+                        <td>Copyright, alamat, link sosial media</td>
+                        <td><code>&lt;div class="footer"&gt;</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>D. Algoritma Pembuatan Halaman Web Sederhana</h4>
+            <p><strong>Studi Kasus: Membuat Halaman Profil MAS Diniyah Limo Jurai</strong></p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Langkah</th>
+                        <th>Aktivitas</th>
+                        <th>Output</th>
+                        <th>Nilai Karakter</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>Pahami tujuan:</strong> Menampilkan profil madrasah yang informatif, benar, dan menarik</td>
+                        <td>Dokumen brief singkat</td>
+                        <td>Tanggung jawab</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>Rencanakan isi:</strong> Judul, sejarah, visi misi, program unggulan, alamat, kontak</td>
+                        <td>Daftar konten (content list)</td>
+                        <td>Ketelitian</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>Bagi bagian:</strong> Header (logo+nama), Nav (menu), Main (isi), Footer (kontak)</td>
+                        <td>Wireframe/sketsa layout</td>
+                        <td>Dekomposisi</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>Tulis kode HTML</strong> sesuai rencana, gunakan elemen semantik</td>
+                        <td>File .html</td>
+                        <td>Kreativitas & Itqan</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><strong>Simpan</strong> dengan ekstensi .html (misal: profil-madrasah.html)</td>
+                        <td>File tersimpan</td>
+                        <td>Kerapian</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><strong>Buka di browser,</strong> periksa tampilan dan kesalahan</td>
+                        <td>Daftar error (jika ada)</td>
+                        <td>Ketelitian</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><strong>Perbaiki</strong> hingga tampil sempurna di berbagai browser</td>
+                        <td>Halaman final</td>
+                        <td>Kesabaran</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><strong>Sampaikan</strong> dengan bahasa santun, bermanfaat, dan menghormati</td>
+                        <td>Publikasi/presentasi</td>
+                        <td>Adab & Kebaikan</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Contoh Kode Lengkap: Halaman Profil Madrasah</h4>
+            <div class="code-block">
+<span class="tag-html">&lt;!DOCTYPE html&gt;</span>
+<span class="tag-html">&lt;html</span> <span class="attr">lang</span>=<span class="string">"id"</span><span class="tag-html">&gt;</span>
+<span class="tag-html">&lt;head&gt;</span>
+    <span class="tag-html">&lt;meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span><span class="tag-html">&gt;</span>
+    <span class="tag-html">&lt;meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span><span class="tag-html">&gt;</span>
+    <span class="tag-html">&lt;title&gt;</span>MAS DINIYAH LIMO JURAI<span class="tag-html">&lt;/title&gt;</span>
+<span class="tag-html">&lt;/head&gt;</span>
+<span class="tag-html">&lt;body&gt;</span>
+    <span class="tag-html">&lt;header&gt;</span>
+        <span class="tag-html">&lt;h1&gt;</span>Selamat Datang di MAS Diniyah Limo Jurai Sungai Pua<span class="tag-html">&lt;/h1&gt;</span>
+        <span class="tag-html">&lt;p&gt;</span>Membentuk Generasi Cerdas, Berakhlak Mulia, dan Bermanfaat<span class="tag-html">&lt;/p&gt;</span>
+    <span class="tag-html">&lt;/header&gt;</span><br>
+    <span class="tag-html">&lt;nav&gt;</span>
+        <span class="tag-html">&lt;a</span> <span class="attr">href</span>=<span class="string">"#profil"</span><span class="tag-html">&gt;</span>Profil<span class="tag-html">&lt;/a&gt;</span> |
+        <span class="tag-html">&lt;a</span> <span class="attr">href</span>=<span class="string">"#visi"</span><span class="tag-html">&gt;</span>Visi Misi<span class="tag-html">&lt;/a&gt;</span> |
+        <span class="tag-html">&lt;a</span> <span class="attr">href</span>=<span class="string">"#kontak"</span><span class="tag-html">&gt;</span>Kontak<span class="tag-html">&lt;/a&gt;</span>
+    <span class="tag-html">&lt;/nav&gt;</span>
+    <span class="tag-html">&lt;main&gt;</span>
+        <span class="tag-html">&lt;section</span> <span class="attr">id</span>=<span class="string">"profil"</span><span class="tag-html">&gt;</span>
+            <span class="tag-html">&lt;h2&gt;</span>Profil Singkat<span class="tag-html">&lt;/h2&gt;</span>
+            <span class="tag-html">&lt;p&gt;</span>Madrasah Aliyah Swasta Diniyah Limo Jurai 
+            Sungai Pua adalah lembaga pendidikan yang berkomitmen 
+            mencetak santri yang tidak hanya pintar ilmu pengetahuan, 
+            tetapi juga kokoh iman dan akhlaknya.<span class="tag-html">&lt;/p&gt;</span>
+        <span class="tag-html">&lt;/section&gt;</span>
+        <span class="tag-html">&lt;section</span> <span class="attr">id</span>=<span class="string">"visi"</span><span class="tag-html">&gt;</span>
+            <span class="tag-html">&lt;h2&gt;</span>Visi &amp; Misi<span class="tag-html">&lt;/h2&gt;</span>
+            <span class="tag-html">&lt;h3&gt;</span>Visi<span class="tag-html">&lt;/h3&gt;</span>
+            <span class="tag-html">&lt;p&gt;</span>Menjadi madrasah unggul yang melahirkan pemimpin 
+            masa depan berlandaskan nilai Islam.<span class="tag-html">&lt;/p&gt;</span>
+            <span class="tag-html">&lt;h3&gt;</span>Misi<span class="tag-html">&lt;/h3&gt;</span>
+            <span class="tag-html">&lt;ul&gt;</span>
+                <span class="tag-html">&lt;li&gt;</span>Meningkatkan kualitas pembelajaran inovatif<span class="tag-html">&lt;/li&gt;</span>
+                <span class="tag-html">&lt;li&gt;</span>Menanamkan nilai kasih sayang dan kejujuran<span class="tag-html">&lt;/li&gt;</span>
+                <span class="tag-html">&lt;li&gt;</span>Membangun lingkungan belajar nyaman<span class="tag-html">&lt;/li&gt;</span>
+            <span class="tag-html">&lt;/ul&gt;</span>
+        <span class="tag-html">&lt;/section&gt;</span>
+    <span class="tag-html">&lt;/main&gt;</span>
+    <span class="tag-html">&lt;footer</span> <span class="attr">id</span>=<span class="string">"kontak"</span><span class="tag-html">&gt;</span>
+        <span class="tag-html">&lt;p&gt;</span>Alamat: Jln. Raya Sungai Pua<span class="tag-html">&lt;/p&gt;</span>
+        <span class="tag-html">&lt;p&gt;</span>&amp;copy; 2026 MAS Diniyah Limo Jurai<span class="tag-html">&lt;/p&gt;</span>
+    <span class="tag-html">&lt;/footer&gt;</span>
+<span class="tag-html">&lt;/body&gt;</span>
+<span class="tag-html">&lt;/html&gt;</span>
+            </div>
+        </div>
+
+        <!-- BAGIAN 3 -->
+        <div class="content-section fade-up">
+            <h3>📕 BAB 3: Proyek & Nilai Penerapan</h3>
+
+            <h4>Proyek Akhir: Halaman Web Islami / Profil Madrasah</h4>
+            <p>Proyek akhir semester ini merupakan integrasi seluruh kompetensi yang telah dipelajari. Siswa secara berkelompok (4-5 orang) akan merancang, membangun, dan mempresentasikan sebuah halaman web bertema Islami atau profil madrasah dengan menerapkan seluruh langkah algoritma yang telah dipelajari.</p>
+
+            <p><strong>Kriteria Penilaian Proyek:</strong></p>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Aspek</th>
+                        <th>Bobot</th>
+                        <th>Indikator</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Struktur HTML</td>
+                        <td>25%</td>
+                        <td>Valid, semantik, hierarki heading benar, elemen lengkap</td>
+                    </tr>
+                    <tr>
+                        <td>Konten & Nilai</td>
+                        <td>25%</td>
+                        <td>Informatif, positif, sopan, mengajak kebaikan, tidak menyinggung</td>
+                    </tr>
+                    <tr>
+                        <td>Aksesibilitas</td>
+                        <td>15%</td>
+                        <td>Alt text pada gambar, kontras memadai, navigasi keyboard</td>
+                    </tr>
+                    <tr>
+                        <td>Kreativitas & Estetika</td>
+                        <td>15%</td>
+                        <td>Tampilan rapi, nyaman dibaca, layout terorganisir</td>
+                    </tr>
+                    <tr>
+                        <td>Kerja Sama & Presentasi</td>
+                        <td>20%</td>
+                        <td>Pembagian tugas adil, presentasi jelas, menjawab pertanyaan dengan santun</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Nilai-Nilai yang Ditanamkan Sepanjang Semester</h4>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Nilai</th>
+                        <th>Penerapan dalam Pembelajaran</th>
+                        <th>Dalil/Referensi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Kesabaran</strong></td>
+                        <td>Menyusun kode HTML langkah demi langkah, debugging tanpa frustrasi</td>
+                        <td>"Wahai orang-orang yang beriman, bersabarlah kamu" (QS. Ali Imran: 200)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ketelitian</strong></td>
+                        <td>Memeriksa setiap tag pembuka dan penutup, validasi kode</td>
+                        <td>"Allah mencintai hamba yang jika bekerja, mengerjakannya dengan itqan" (HR. Baihaqi)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tanggung Jawab</strong></td>
+                        <td>Menyajikan informasi yang benar, tidak menyebarkan hoaks di web</td>
+                        <td>"Cukuplah seseorang dikatakan pendusta jika ia menceritakan semua yang didengar" (HR. Muslim)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kebaikan</strong></td>
+                        <td>Membuat karya yang bermanfaat, membantu orang lain melalui web</td>
+                        <td>"Sebaik-baik manusia adalah yang paling bermanfaat" (HR. Ahmad)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kreativitas</strong></td>
+                        <td>Menyusun tampilan yang indah, nyaman, dan mengundang untuk membaca</td>
+                        <td>"Sesungguhnya Allah itu Indah dan mencintai keindahan" (HR. Muslim)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="value-box">
+                <h5>🌿 Refleksi Akhir</h5>
+                <p>Belajar Informatika di madrasah bukan sekadar menguasai teknologi. Ia adalah <strong>amanah ilmu</strong> yang kelak akan dipertanggungjawabkan. Setiap baris kode yang kita tulis, setiap halaman web yang kita buat, hendaknya menjadi <strong>amal jariyah digital</strong> — ilmu yang terus bermanfaat bagi orang lain bahkan setelah kita tiada. Sebagaimana sabda Rasulullah ﷺ: <em>"Apabila anak Adam meninggal, terputuslah amalnya kecuali tiga: sedekah jariyah, ilmu yang bermanfaat, dan anak saleh yang mendoakannya"</em> (HR. Muslim).</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     DAFTAR PERTEMUAN (MUNCUL SETELAH ISI BUKU)
+============================================ -->
+<section id="pertemuan">
+    <div class="container">
+        <span class="section-label">Daftar Isi</span>
+        <h2 class="section-title">16 Pertemuan Terstruktur</h2>
+        <p class="section-desc">Perjalanan belajar dari konsep algoritma hingga membangun halaman web yang bermanfaat, disusun dengan pendekatan karakter Islami.</p>
+
+        <div class="meetings-grid">
+
+            <!-- PERTEMUAN 1 -->
+            <div class="meeting-card fade-up">
+                <span class="tag tag-materi">Materi</span>
+                <div class="meeting-number">Pertemuan 01</div>
+                <h3>Pengertian & Sifat Algoritma</h3>
+                <p>Memahami definisi algoritma sebagai langkah logis, sistematis, dan terurut. Mempelajari 5 sifat fundamental: input, output, kejelasan, keterbatasan, dan efektivitas.</p>
+                <a href="1.html" target="_blank" class="meeting-link">
+                    Buka Materi <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video1">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 2 -->
+            <div class="meeting-card fade-up">
+                <span class="tag tag-materi">Materi</span>
+                <div class="meeting-number">Pertemuan 02</div>
+                <h3>Berpikir Komputasional & Nilai Karakter</h3>
+                <p>Dekomposisi, pengenalan pola, abstraksi, dan perancangan algoritma. Mengaitkan setiap tahap dengan nilai kesabaran, kepekaan, kejujuran, dan kreativitas.</p>
+                <a href="2.html" target="_blank" class="meeting-link">
+                    Buka Materi <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video2">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 3 -->
+            <div class="meeting-card fade-up">
+                <span class="tag tag-materi">Materi</span>
+                <div class="meeting-number">Pertemuan 03</div>
+                <h3>Cara Menyajikan Algoritma</h3>
+                <p>Tiga metode penyajian: teks deskripsi, bagan alir (flowchart) dengan simbol standar, dan pseudokode. Praktik menulis algoritma untuk masalah sehari-hari.</p>
+                <a href="3.html" target="_blank" class="meeting-link">
+                    Buka Materi <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video3">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 4 -->
+            <div class="meeting-card fade-up">
+                <span class="tag tag-materi">Materi</span>
+                <div class="meeting-number">Pertemuan 04</div>
+                <h3>Pengenalan Web & HTML</h3>
+                <p>Sejarah World Wide Web, cara kerja browser, peran HTML sebagai kerangka halaman web. Prinsip membuat konten yang bermanfaat, mudah diakses, dan sopan.</p>
+                <a href="4.html" target="_blank" class="meeting-link">
+                    Buka Materi <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video4">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 5 -->
+            <div class="meeting-card fade-up">
+                <span class="tag tag-materi">Materi</span>
+                <div class="meeting-number">Pertemuan 05</div>
+                <h3>Struktur Dasar Dokumen HTML</h3>
+                <p>Mengenal DOCTYPE, tag html, head, title, body. Memahami hierarki dokumen dan menulis halaman HTML pertama dari nol.</p>
+                <a href="5.html" target="_blank" class="meeting-link">
+                    Buka Materi <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video5">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 6 -->
+            <div class="meeting-card fade-up">
+                <span class="tag tag-materi">Materi</span>
+                <div class="meeting-number">Pertemuan 06</div>
+                <h3>Elemen & Tag Penting HTML (Bagian 1)</h3>
+                <p>Tag heading, paragraf, strong, em, br, hr. Daftar berurutan dan tak berurutan. Praktik membuat artikel sederhana dengan format yang benar.</p>
+                <a href="6.html" target="_blank" class="meeting-link">
+                    Buka Materi <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video6">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 7 -->
+            <div class="meeting-card fade-up">
+                <span class="tag tag-materi">Materi</span>
+                <div class="meeting-number">Pertemuan 07</div>
+                <h3>Elemen & Tag Penting HTML (Bagian 2)</h3>
+                <p>Tautan (anchor), gambar dengan alt text, dan elemen semantik HTML5: header, nav, main, section, article, footer. Aksesibilitas dan etika web.</p>
+                <a href="7.html" target="_blank" class="meeting-link">
+                    Buka Materi <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video7">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 8 -->
+            <div class="meeting-card fade-up">
+                <span class="tag tag-materi">Materi</span>
+                <div class="meeting-number">Pertemuan 08</div>
+                <h3>Algoritma Pembuatan Halaman Web</h3>
+                <p>8 langkah sistematis: pahami tujuan → rencanakan isi → bagi bagian → tulis kode → simpan → uji → perbaiki → sampaikan. Studi kasus halaman profil sekolah.</p>
+                <a href="8.html" target="_blank" class="meeting-link">
+                    Buka Materi <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video8">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 9 - UTS -->
+            <div class="meeting-card uts fade-up">
+                <span class="tag tag-uts">Evaluasi</span>
+                <div class="meeting-number">Pertemuan 09</div>
+                <h3>Ujian Tengah Semester (UTS)</h3>
+                <p>Evaluasi komprehensif mencakup teori algoritma, berpikir komputasional, penyajian algoritma, dan dasar-dasar HTML. Soal pilihan ganda, esai, dan praktik.</p>
+                <a href="9.html" target="_blank" class="meeting-link">
+                    Buka Soal UTS <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 10 - DISKUSI -->
+            <div class="meeting-card diskusi fade-up">
+                <span class="tag tag-diskusi">Diskusi Kelompok</span>
+                <div class="meeting-number">Pertemuan 10</div>
+                <h3>Proyek Kolaboratif: Analisis & Perancangan Web</h3>
+                <p>Kelompok menganalisis 3 website madrasah, mengidentifikasi struktur HTML, dan merancang wireframe halaman web bertema Islami dengan pembagian tugas yang adil.</p>
+                <a href="10.html" target="_blank" class="meeting-link">
+                    Buka Panduan <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video10">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 11 - DISKUSI -->
+            <div class="meeting-card diskusi fade-up">
+                <span class="tag tag-diskusi">Diskusi Kelompok</span>
+                <div class="meeting-number">Pertemuan 11</div>
+                <h3>Proyek Kolaboratif: Penulisan Kode HTML</h3>
+                <p>Implementasi rancangan menjadi kode HTML nyata. Setiap anggota bertanggung jawab atas satu section. Peer review dan perbaikan bersama dalam kelompok.</p>
+                <a href="11.html" target="_blank" class="meeting-link">
+                    Buka Panduan <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video11">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 12 -->
+            <div class="meeting-card fade-up">
+                <span class="tag tag-materi">Materi & Proyek</span>
+                <div class="meeting-number">Pertemuan 12</div>
+                <h3>Proyek: Halaman Web Islami / Profil Madrasah</h3>
+                <p>Menerapkan seluruh algoritma: rencana → struktur → kode → uji → sempurnakan. Konten positif, tampilan rapi, mudah dibaca, dan menghormati sesama.</p>
+                <a href="12.html" target="_blank" class="meeting-link">
+                    Buka Materi <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video12">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 13 - DISKUSI -->
+            <div class="meeting-card diskusi fade-up">
+                <span class="tag tag-diskusi">Diskusi Kelompok</span>
+                <div class="meeting-number">Pertemuan 13</div>
+                <h3>Presentasi & Peer Review Proyek Web</h3>
+                <p>Setiap kelompok mempresentasikan halaman web yang dibuat. Kelompok lain memberikan masukan konstruktif dengan bahasa santun dan membangun.</p>
+                <a href="13.html" target="_blank" class="meeting-link">
+                    Buka Panduan <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video13">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 14 - DISKUSI -->
+            <div class="meeting-card diskusi fade-up">
+                <span class="tag tag-diskusi">Diskusi Kelompok</span>
+                <div class="meeting-number">Pertemuan 14</div>
+                <h3>Perbaikan & Penyempurnaan Proyek Akhir</h3>
+                <p>Berdasarkan masukan peer review, kelompok menyempurnakan proyek. Validasi HTML, perbaikan aksesibilitas, dan penulisan refleksi pembelajaran.</p>
+                <a href="14.html" target="_blank" class="meeting-link">
+                    Buka Panduan <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video14">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 15 -->
+            <div class="meeting-card fade-up">
+                <span class="tag tag-materi">Review</span>
+                <div class="meeting-number">Pertemuan 15</div>
+                <h3>Review Komprehensif & Persiapan UAS</h3>
+                <p>Ringkasan seluruh materi semester. Latihan soal, simulasi ujian, dan pembahasan studi kasus. Tips menghadapi UAS dengan tenang dan percaya diri.</p>
+                <a href="15.html" target="_blank" class="meeting-link">
+                    Buka Materi <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <br>
+                <a href="#" class="btn-video" data-video="video15">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Tonton Video
+                </a>
+            </div>
+
+            <!-- PERTEMUAN 16 - UAS -->
+            <div class="meeting-card uas fade-up">
+                <span class="tag tag-uas">Evaluasi Akhir</span>
+                <div class="meeting-number">Pertemuan 16</div>
+                <h3>Ujian Akhir Semester (UAS)</h3>
+                <p>Evaluasi menyeluruh: teori algoritma, berpikir komputasional, HTML lengkap, proyek web, dan penerapan nilai karakter. Portofolio proyek sebagai bagian penilaian.</p>
+                <a href="16.html" target="_blank" class="meeting-link">
+                    Buka Soal UAS <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- REFERENSI -->
+<section id="referensi">
+    <div class="container">
+        <span class="section-label">Daftar Pustaka</span>
+        <h2 class="section-title">Buku Referensi & Sumber Belajar</h2>
+        <p class="section-desc">Referensi terkini dan terpercaya untuk pendalaman materi Informatika Kelas XII.</p>
+
+        <ul class="ref-list fade-up">
+            <li><strong>Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi RI.</strong> (2024). <em>Informatika untuk SMA/MA Kelas XII</em> (Edisi Revisi Kurikulum Merdeka). Jakarta: Pusat Kurikulum dan Perbukuan, Kemendikbudristek. ISBN: 978-602-244-892-1.</li>
+            <li><strong>Wing, J. M.</strong> (2006). "Computational Thinking." <em>Communications of the ACM</em>, 49(3), 33–35. ACM Press. DOI: 10.1145/1118178.1118215.</li>
+            <li><strong>Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C.</strong> (2022). <em>Introduction to Algorithms</em> (4th Edition). Cambridge: MIT Press. ISBN: 978-0-262-04630-5.</li>
+            <li><strong>Freeman, E. & Robson, E.</strong> (2024). <em>Head First HTML and CSS</em> (3rd Edition). Sebastopol: O'Reilly Media. ISBN: 978-1-492-09785-3.</li>
+            <li><strong>Duckett, J.</strong> (2023). <em>HTML & CSS: Design and Build Websites</em> (Updated Edition). Indianapolis: John Wiley & Sons. ISBN: 978-1-118-00818-8.</li>
+            <li><strong>MDN Web Docs (Mozilla).</strong> (2025). <em>HTML: HyperText Markup Language — Referensi Lengkap</em>. Diakses dari: https://developer.mozilla.org/en-US/docs/Web/HTML [Diakses: Juli 2026].</li>
+            <li><strong>W3C (World Wide Web Consortium).</strong> (2025). <em>HTML Living Standard</em>. Diakses dari: https://html.spec.whatwg.org/ [Diakses: Juli 2026].</li>
+            <li><strong>Munir.</strong> (2024). <em>Algoritma dan Pemrograman: Konsep Dasar dan Implementasi</em> (Edisi ke-3). Bandung: Informatika Bandung. ISBN: 978-602-8758-45-2.</li>
+            <li><strong>Rinaldi Munir & Leony Lidya.</strong> (2023). <em>Berpikir Komputasional: Fondasi Problem Solving Abad 21</em>. Yogyakarta: ANDI Publisher. ISBN: 978-623-02-6789-1.</li>
+            <li><strong>Flanagan, D.</strong> (2024). <em>HTML5 & CSS3: The Definitive Guide</em> (2nd Edition). Sebastopol: O'Reilly Media. ISBN: 978-1-492-09381-7.</li>
+            <li><strong>Kementerian Agama RI.</strong> (2024). <em>Panduan Integrasi Nilai Karakter dalam Pembelajaran Madrasah</em>. Jakarta: Direktorat KSKK Madrasah, Kemenag RI.</li>
+            <li><strong>BCS – The Chartered Institute for IT.</strong> (2025). <em>Computational Thinking: A Beginner's Guide to Problem-Solving and Programming</em>. Swindon: BCS Learning & Development. ISBN: 978-1-78017-562-1.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <h3>MAS DINIYAH LIMO JURAI</h3>
+    <p>Jln. Raya Sungai Pua, Kabupaten Agam, Sumatera Barat</p>
+    <p style="margin-top: 16px; font-size: 0.8rem; opacity: 0.6;">
+        &copy; 2026 — Buku Informatika Kelas XII oleh JEFRI, S.Pd<br>
+        <em>"Menuntut ilmu adalah ibadah, menyebarkannya adalah sedekah."</em>
+    </p>
+</footer>
+
+<!-- ============================================
+     TOMBOL PRINT FLOATING
+============================================ -->
+<button class="print-button" onclick="window.print()" title="Cetak atau Simpan sebagai PDF">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
+        <path d="M6 14h12v8H6z"/>
+    </svg>
+    Cetak / Simpan PDF
+</button>
+
+<!-- ============================================
+     JAVASCRIPT: KONFIGURASI MUDAH
+     Ganti gambar & link video di sini
+============================================ -->
+<script>
+    // ==========================================
+    // 🖼️ GANTI COVER BUKU & FOTO PENULIS
+    // Cukup ubah nilai di bawah ini
+    // ==========================================
+    const CONFIG_GAMBAR = {
+        coverBuku: "cover-buku.png",       // ← Ganti nama/path file cover buku
+        photoPenulis: "photo-penulis.jpg"  // ← Ganti nama/path file foto penulis
+    };
+
+    // Terapkan gambar
+    document.getElementById('bookCover').src = CONFIG_GAMBAR.coverBuku;
+    document.getElementById('authorPhoto').src = CONFIG_GAMBAR.photoPenulis;
+
+
+    // ==========================================
+    // 🎬 GANTI LINK VIDEO SETIAP PERTEMUAN
+    // Cukup ubah URL di bawah ini
+    // Format: video[Nomor]: "URL_VIDEO"
+    // ==========================================
+    const CONFIG_VIDEO = {
+        video1:  "https://www.youtube.com/watch?v=CONTOH1",   // Pertemuan 1: Pengertian Algoritma
+        video2:  "https://www.youtube.com/watch?v=CONTOH2",   // Pertemuan 2: Berpikir Komputasional
+        video3:  "https://www.youtube.com/watch?v=CONTOH3",   // Pertemuan 3: Menyajikan Algoritma
+        video4:  "https://www.youtube.com/watch?v=CONTOH4",   // Pertemuan 4: Pengenalan Web & HTML
+        video5:  "https://www.youtube.com/watch?v=CONTOH5",   // Pertemuan 5: Struktur Dasar HTML
+        video6:  "https://www.youtube.com/watch?v=CONTOH6",   // Pertemuan 6: Tag Penting (1)
+        video7:  "https://www.youtube.com/watch?v=CONTOH7",   // Pertemuan 7: Tag Penting (2)
+        video8:  "https://www.youtube.com/watch?v=CONTOH8",   // Pertemuan 8: Algoritma Web
+        video10: "https://www.youtube.com/watch?v=CONTOH10",  // Pertemuan 10: Diskusi Kelompok 1
+        video11: "https://www.youtube.com/watch?v=CONTOH11",  // Pertemuan 11: Diskusi Kelompok 2
+        video12: "https://www.youtube.com/watch?v=CONTOH12",  // Pertemuan 12: Proyek Web Islami
+        video13: "https://www.youtube.com/watch?v=CONTOH13",  // Pertemuan 13: Diskusi Kelompok 3
+        video14: "https://www.youtube.com/watch?v=CONTOH14",  // Pertemuan 14: Diskusi Kelompok 4
+        video15: "https://www.youtube.com/watch?v=CONTOH15"   // Pertemuan 15: Review UAS
+    };
+
+    // Terapkan link video ke tombol
+    document.querySelectorAll('.btn-video').forEach(btn => {
+        const videoKey = btn.getAttribute('data-video');
+        if (CONFIG_VIDEO[videoKey]) {
+            btn.href = CONFIG_VIDEO[videoKey];
+            btn.target = "_blank";
+            btn.rel = "noopener noreferrer";
+        }
+    });
+
+
+    // ==========================================
+    // 📜 STICKY NAVIGATION
+    // ==========================================
+    const stickyNav = document.getElementById('stickyNav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 600) {
+            stickyNav.classList.add('show');
+        } else {
+            stickyNav.classList.remove('show');
+        }
+    });
+
+
+    // ==========================================
+    // ✨ SCROLL ANIMATION (Fade Up)
+    // ==========================================
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach(el => {
+        observer.observe(el);
+    });
+
+
+    // ==========================================
+    // 🔧 FUNGSI BANTU: GANTI GAMBAR DINAMIS
+    // Panggil di console browser jika perlu:
+    //   gantiCover("path/baru.png")
+    //   gantiFoto("path/baru.jpg")
+    // ==========================================
+    function gantiCover(url) {
+        document.getElementById('bookCover').src = url;
+        CONFIG_GAMBAR.coverBuku = url;
+        console.log('✅ Cover buku diganti ke:', url);
+    }
+
+    function gantiFoto(url) {
+        document.getElementById('authorPhoto').src = url;
+        CONFIG_GAMBAR.photoPenulis = url;
+        console.log('✅ Foto penulis diganti ke:', url);
+    }
+
+    function gantiVideo(key, url) {
+        CONFIG_VIDEO[key] = url;
+        const btn = document.querySelector(`[data-video="${key}"]`);
+        if (btn) {
+            btn.href = url;
+            console.log(`✅ Video ${key} diganti ke:`, url);
+        }
+    }
+</script>
+
+</body>
+</html>

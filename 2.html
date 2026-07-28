@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 02 — Berpikir Komputasional & Nilai Karakter | INFORMATIKA KELAS XII</title>
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --gold: #d4a574;
+            --light: #f8f9fa;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --white: #ffffff;
+            --shadow: 0 20px 60px rgba(0,0,0,0.08);
+            --shadow-hover: 0 30px 80px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: var(--primary);
+            color: var(--white);
+            padding: 14px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .top-bar .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .top-bar .logo a {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .top-bar .logo a:hover { color: var(--gold); }
+
+        .top-bar .nav-links { display: flex; gap: 20px; align-items: center; }
+        .top-bar .nav-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .top-bar .nav-links a:hover { color: var(--gold); }
+
+        .meeting-indicator {
+            background: rgba(233,69,96,0.15);
+            border: 1px solid rgba(233,69,96,0.3);
+            color: var(--highlight);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* HERO HEADER */
+        .page-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            color: var(--white);
+            padding: 80px 20px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,165,116,0.08) 0%, transparent 70%);
+        }
+
+        .page-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb a { color: var(--gold); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        .page-hero .meeting-number {
+            display: inline-block;
+            background: rgba(233,69,96,0.2);
+            border: 1px solid rgba(233,69,96,0.4);
+            color: var(--highlight);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .page-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .page-hero h1 span { color: var(--gold); }
+
+        .page-hero .subtitle {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.75);
+            max-width: 700px;
+            font-weight: 300;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 24px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .meta-item svg { width: 16px; height: 16px; color: var(--gold); }
+
+        /* MAIN CONTENT */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .content-block {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .content-block h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .content-block h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 28px 0 14px;
+        }
+
+        .content-block h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 20px 0 10px;
+        }
+
+        .content-block p {
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.9;
+            margin-bottom: 14px;
+        }
+
+        .content-block ul, .content-block ol {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        .content-block li {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        .content-block strong { color: var(--primary); }
+
+        /* LEARNING OBJECTIVES */
+        .objectives {
+            background: linear-gradient(135deg, #f0f7ff, #e8f4fd);
+            border: 1px solid rgba(15,52,96,0.1);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 30px;
+        }
+
+        .objectives h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .objectives ul { list-style: none; padding: 0; }
+
+        .objectives li {
+            padding: 8px 0 8px 32px;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .objectives li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 22px;
+            height: 22px;
+            background: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* QUOTE BOX */
+        .quote-box {
+            background: linear-gradient(135deg, #fff8f0, #fff3e6);
+            border-left: 4px solid var(--gold);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin: 24px 0;
+            font-style: italic;
+            color: var(--text);
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 16px;
+            font-size: 4rem;
+            color: var(--gold);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .quote-box p { padding-left: 30px; margin-bottom: 8px; }
+
+        .quote-box cite {
+            display: block;
+            padding-left: 30px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* EXAMPLE BOX */
+        .example-box {
+            background: linear-gradient(135deg, #f0f7ff, #e8f4fd);
+            border: 1px solid rgba(15,52,96,0.1);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .example-box h5 {
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .case-box {
+            background: linear-gradient(135deg, #fff8f0, #fff3e6);
+            border: 1px solid rgba(212,165,116,0.2);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .case-box h5 {
+            color: #b8860b;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .value-box {
+            background: linear-gradient(135deg, #f0fff4, #e6ffed);
+            border: 1px solid rgba(46,204,113,0.15);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .value-box h5 {
+            color: #27ae60;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        /* CODE BLOCK */
+        .code-block {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 24px 28px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .code-block .comment { color: #6c7086; font-style: italic; }
+        .code-block .keyword { color: #cba6f7; font-weight: 600; }
+        .code-block .string { color: #a6e3a1; }
+
+        /* TABLE */
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 24px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .comparison-table thead {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .comparison-table th {
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison-table td {
+            padding: 12px 18px;
+            font-size: 0.88rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            color: var(--text);
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: rgba(0,0,0,0.02);
+        }
+
+        /* FLOWCHART VISUAL */
+        .flowchart {
+            background: var(--white);
+            border: 2px dashed rgba(15,52,96,0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .flow-step {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 6px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .flow-start { background: var(--accent); color: var(--white); border-radius: 30px; }
+        .flow-process { background: rgba(15,52,96,0.1); color: var(--accent); border: 1px solid var(--accent); }
+        .flow-decision { background: rgba(212,165,116,0.15); color: #b8860b; border: 1px solid var(--gold); }
+        .flow-end { background: var(--highlight); color: var(--white); border-radius: 30px; }
+        .flow-arrow { color: var(--text-light); font-size: 1.2rem; margin: 0 4px; }
+
+        /* QUIZ */
+        .quiz-box {
+            background: linear-gradient(135deg, #fff5f7, #ffe8ec);
+            border: 1px solid rgba(233,69,96,0.15);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .quiz-box h5 {
+            color: var(--highlight);
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quiz-question {
+            background: var(--white);
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border-left: 3px solid var(--highlight);
+        }
+
+        .quiz-question p {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .quiz-options { list-style: none; padding: 0; }
+
+        .quiz-options li {
+            padding: 6px 0 6px 28px;
+            position: relative;
+            font-size: 0.88rem;
+            margin-bottom: 4px;
+        }
+
+        .quiz-options li::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 20px;
+            height: 20px;
+            background: rgba(233,69,96,0.1);
+            color: var(--highlight);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        /* TASK BOX */
+        .task-box {
+            background: linear-gradient(135deg, #f0f7ff, #e8f4fd);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 28px;
+            margin: 24px 0;
+        }
+
+        .task-box h5 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .task-box ol { padding-left: 20px; }
+        .task-box li { margin-bottom: 10px; font-size: 0.9rem; }
+
+        /* SUMMARY BOX */
+        .summary-box {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .summary-box h4 {
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+
+        .summary-box ul { list-style: none; padding: 0; }
+
+        .summary-box li {
+            padding: 8px 0 8px 28px;
+            position: relative;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9rem;
+        }
+
+        .summary-box li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        /* UJI FORMATIF SECTION */
+        .uji-formatif-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            border-radius: var(--radius);
+            padding: 50px 40px;
+            margin: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(26,26,46,0.25);
+        }
+
+        .uji-formatif-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,165,116,0.15) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .uji-formatif-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(233,69,96,0.12) 0%, transparent 70%);
+            animation: pulse 5s ease-in-out infinite reverse;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .uji-formatif-content { position: relative; z-index: 2; }
+
+        .uji-formatif-badge {
+            display: inline-block;
+            background: rgba(212,165,116,0.2);
+            border: 1px solid rgba(212,165,116,0.4);
+            color: var(--gold);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .uji-formatif-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--highlight), #c0392b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(233,69,96,0.4);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .uji-formatif-icon svg { width: 36px; height: 36px; color: var(--white); }
+
+        .uji-formatif-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .uji-formatif-title span { color: var(--gold); }
+
+        .uji-formatif-desc {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+            max-width: 600px;
+            margin: 0 auto 28px;
+            line-height: 1.7;
+        }
+
+        .uji-formatif-features {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .uji-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 30px;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.82rem;
+            font-weight: 500;
+        }
+
+        .uji-feature svg { width: 16px; height: 16px; color: var(--gold); }
+
+        .btn-uji-formatif {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--gold), #b8860b);
+            color: var(--primary);
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(212,165,116,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-uji-formatif::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-uji-formatif:hover::before { left: 100%; }
+
+        .btn-uji-formatif:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(212,165,116,0.6);
+        }
+
+        .btn-uji-formatif svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-uji-formatif:hover svg { transform: translateX(4px); }
+
+        .uji-formatif-note {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            font-style: italic;
+        }
+
+        /* NAVIGATION */
+        .meeting-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--light);
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 20px 24px;
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent);
+        }
+
+        .nav-btn.next {
+            justify-content: flex-end;
+            text-align: right;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: var(--white);
+            border: none;
+        }
+
+        .nav-btn .nav-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.7;
+            margin-bottom: 4px;
+        }
+
+        .nav-btn .nav-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .nav-btn svg { width: 24px; height: 24px; flex-shrink: 0; }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary);
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        footer h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        footer p { font-size: 0.85rem; margin-bottom: 4px; }
+
+        /* PRINT BUTTON */
+        .print-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--highlight), #c0392b);
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(233,69,96,0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .print-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(233,69,96,0.5);
+        }
+
+        .print-button svg { width: 18px; height: 18px; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 1.8rem; }
+            .content-block { padding: 24px; }
+            .meeting-nav { flex-direction: column; }
+            .top-bar { padding: 12px 16px; font-size: 0.85rem; }
+            .top-bar .nav-links { gap: 12px; }
+            .top-bar .nav-links a { font-size: 0.75rem; }
+            .comparison-table { font-size: 0.78rem; }
+            .comparison-table th, .comparison-table td { padding: 8px 10px; }
+            .uji-formatif-section { padding: 35px 24px; }
+            .uji-formatif-title { font-size: 1.4rem; }
+            .uji-formatif-desc { font-size: 0.9rem; }
+            .btn-uji-formatif { padding: 14px 28px; font-size: 0.9rem; }
+            .uji-formatif-features { gap: 10px; }
+            .uji-feature { font-size: 0.75rem; padding: 6px 12px; }
+        }
+
+        /* PRINT CSS */
+        @media print {
+            .top-bar, .print-button, .meeting-nav, .page-hero::before,
+            .uji-formatif-section::before, .uji-formatif-section::after {
+                display: none !important;
+            }
+
+            * {
+                background: transparent !important;
+                color: #000 !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
+            }
+
+            body { background: #fff !important; font-size: 11pt; line-height: 1.5; }
+
+            .main-content { padding: 0; max-width: 100%; }
+
+            .page-hero {
+                padding: 15px 0;
+                background: transparent !important;
+                color: #000 !important;
+                page-break-after: avoid;
+            }
+
+            .page-hero h1 { font-size: 18pt; margin-bottom: 8px; color: #000 !important; }
+            .page-hero .subtitle { font-size: 10pt; color: #333 !important; }
+            .breadcrumb, .meta-item, .page-hero .meeting-number { color: #000 !important; font-size: 9pt; }
+
+            .content-block {
+                box-shadow: none;
+                border: none;
+                border-bottom: 1px solid #ccc;
+                padding: 15px 0;
+                margin-bottom: 8px;
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+
+            .content-block h2 { font-size: 14pt; margin: 12px 0 10px; page-break-after: avoid; }
+            .content-block h3 { font-size: 12pt; margin: 10px 0 8px; page-break-after: avoid; }
+            .content-block h4 { font-size: 11pt; margin: 8px 0 6px; page-break-after: avoid; }
+
+            .content-block p, .content-block ul, .content-block ol {
+                margin: 6px 0; font-size: 10.5pt; orphans: 2; widows: 2;
+            }
+
+            .comparison-table {
+                width: 100%; font-size: 9pt; margin: 8px 0;
+                page-break-inside: auto !important; break-inside: auto !important;
+            }
+
+            .comparison-table thead {
+                display: table-header-group;
+                page-break-inside: avoid; break-inside: avoid;
+                background: #1a1a2e !important;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            }
+
+            .comparison-table thead th {
+                background: #1a1a2e !important; color: #fff !important;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
+                padding: 6px 8px; font-weight: 600; border: 1px solid #000;
+            }
+
+            .comparison-table tbody tr { page-break-inside: auto; break-inside: auto; }
+
+            .comparison-table td {
+                padding: 5px 8px; border: 1px solid #999; font-size: 9pt; vertical-align: top;
+            }
+
+            .comparison-table tbody tr:nth-child(even) {
+                background: #f5f5f5 !important;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            }
+
+            .example-box, .case-box, .value-box, .quote-box, .objectives, .summary-box {
+                page-break-inside: avoid; break-inside: avoid;
+                border: 1px solid #999; background: #fafafa !important;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
+                margin: 8px 0; padding: 12px; font-size: 10pt;
+            }
+
+            .quiz-box, .task-box {
+                page-break-inside: auto; break-inside: auto;
+                border: 1px solid #999; background: #fafafa !important;
+                margin: 8px 0; padding: 12px;
+            }
+
+            .quiz-question {
+                page-break-inside: avoid; break-inside: avoid;
+                margin: 8px 0; padding: 8px; border-left: 2px solid #e94560; background: #fff !important;
+            }
+
+            .code-block {
+                background: #f0f0f0 !important; color: #333 !important;
+                border: 1px solid #999; font-size: 8pt; line-height: 1.4;
+                white-space: pre-wrap; word-wrap: break-word;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
+                page-break-inside: auto; margin: 8px 0; padding: 10px;
+            }
+
+            .code-block * { color: #333 !important; }
+
+            .flowchart {
+                page-break-inside: avoid; break-inside: avoid;
+                border: 1px dashed #999; padding: 15px; margin: 10px 0;
+            }
+
+            .uji-formatif-section {
+                background: #f5f5f5 !important; border: 2px solid #000;
+                page-break-inside: avoid; padding: 20px; margin: 15px 0;
+            }
+
+            .uji-formatif-title, .uji-formatif-desc, .uji-formatif-badge,
+            .uji-feature, .uji-formatif-note { color: #000 !important; }
+
+            .btn-uji-formatif {
+                background: #000 !important; color: #fff !important;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
+                display: inline-block; padding: 10px 20px; border: 1px solid #000;
+            }
+
+            footer {
+                background: #1a1a2e !important; color: #fff !important;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
+                page-break-before: avoid; margin-top: 20px; padding: 15px 0;
+            }
+
+            footer h4, footer p { color: #fff !important; font-size: 9pt; }
+
+            @page { size: A4; margin: 1.5cm 1.2cm; }
+            @page :first { margin-top: 1cm; }
+
+            li { page-break-inside: avoid; break-inside: avoid; }
+            a[href]:after { content: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="logo">
+        <a href="index.html">← Kembali ke Beranda</a>
+        <span style="opacity: 0.3;">|</span>
+        <span>📘 INFORMATIKA KELAS XII</span>
+    </div>
+    <div class="nav-links">
+        <span class="meeting-indicator">PERTEMUAN 02 / 16</span>
+        <a href="#materi">Materi</a>
+        <a href="#latihan">Latihan</a>
+        <a href="#uji-formatif">Uji Formatif</a>
+        <a href="#tugas">Tugas</a>
+    </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="page-hero-content">
+        <div class="breadcrumb">
+            <a href="index.html">Beranda</a>
+            <span>›</span>
+            <span>Bagian 1: Konsep Dasar Algoritma</span>
+            <span>›</span>
+            <span>Pertemuan 02</span>
+        </div>
+        <span class="meeting-number">Pertemuan 02</span>
+        <h1>Berpikir Komputasional & <span>Nilai Karakter</span></h1>
+        <p class="subtitle">Menguasai empat pilar berpikir komputasional: dekomposisi, pengenalan pola, abstraksi, dan perancangan algoritma — sambil menanamkan nilai kesabaran, kepekaan, kejujuran, dan kreativitas.</p>
+        <div class="meta-info">
+            <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                <span>2 × 45 Menit</span>
+            </div>
+            <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                <span>Bagian 1B</span>
+            </div>
+            <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                <span>Kurikulum Merdeka</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+    <!-- TUJUAN PEMBELAJARAN -->
+    <div class="objectives">
+        <h4>🎯 Tujuan Pembelajaran</h4>
+        <ul>
+            <li>Siswa mampu menjelaskan pengertian berpikir komputasional dan empat pilar utamanya</li>
+            <li>Siswa mampu menerapkan dekomposisi untuk memecah masalah kompleks menjadi bagian kecil</li>
+            <li>Siswa mampu mengenali pola dalam berbagai permasalahan sehari-hari</li>
+            <li>Siswa mampu melakukan abstraksi dengan fokus pada informasi penting</li>
+            <li>Siswa mampu merancang algoritma sederhana sebagai solusi masalah</li>
+            <li>Siswa mampu mengaitkan setiap tahap berpikir komputasional dengan nilai karakter Islami</li>
+        </ul>
+    </div>
+
+    <!-- PENGANTAR -->
+    <div class="content-block">
+        <h2>A. Apa Itu Berpikir Komputasional?</h2>
+
+        <h3>1. Definisi dan Sejarah</h3>
+        <p><strong>Berpikir komputasional</strong> (<em>Computational Thinking</em>) adalah pendekatan pemecahan masalah yang mengadopsi cara kerja ilmuwan komputer. Konsep ini pertama kali dipopulerkan oleh <strong>Prof. Jeannette Wing</strong> dari Carnegie Mellon University pada tahun 2006 melalui artikelnya yang berjudul <em>"Computational Thinking"</em> di Communications of the ACM.</p>
+
+        <p>Menurut Wing, berpikir komputasional adalah <strong>"kemampuan dasar yang harus dimiliki setiap orang"</strong>, setara dengan kemampuan membaca, menulis, dan berhitung. Ini bukan tentang memprogram komputer — melainkan tentang <strong>cara berpikir</strong> yang terstruktur, logis, dan sistematis.</p>
+
+        <div class="quote-box">
+            <p>Berpikir komputasional adalah proses berpikir yang melibatkan perumusan masalah dan solusinya sedemikian rupa sehingga solusi tersebut dapat diwakili dalam bentuk yang dapat dieksekusi oleh agen pemroses informasi.</p>
+            <cite>— Jeannette Wing, 2006</cite>
+        </div>
+
+        <h3>2. Mengapa Berpikir Komputasional Penting?</h3>
+        <p>Di era digital yang serba cepat ini, kemampuan berpikir komputasional menjadi <strong>kunci sukses</strong> di berbagai bidang:</p>
+        <ul>
+            <li><strong>Pendidikan:</strong> Membantu siswa memahami materi kompleks dengan memecahnya menjadi bagian yang mudah dicerna</li>
+            <li><strong>Karier:</strong> Dunia kerja modern membutuhkan kemampuan problem-solving yang terstruktur</li>
+            <li><strong>Kehidupan Sehari-hari:</strong> Membantu mengambil keputusan yang logis dan efektif</li>
+            <li><strong>Inovasi:</strong> Mendorong kreativitas dalam menciptakan solusi baru untuk masalah lama</li>
+        </ul>
+
+        <h3>3. Empat Pilar Berpikir Komputasional</h3>
+        <p>Berpikir komputasional terdiri dari <strong>empat pilar fundamental</strong> yang saling berkaitan:</p>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Pilar</th>
+                    <th>Definisi Singkat</th>
+                    <th>Analogi Sederhana</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1</strong></td>
+                    <td><strong>Dekomposisi</strong></td>
+                    <td>Memecah masalah besar menjadi bagian-bagian kecil yang lebih mudah dikelola</td>
+                    <td>Memotong kue besar menjadi potongan kecil agar mudah dimakan</td>
+                </tr>
+                <tr>
+                    <td><strong>2</strong></td>
+                    <td><strong>Pengenalan Pola</strong></td>
+                    <td>Mencari kesamaan, tren, atau keteraturan dalam masalah</td>
+                    <td>Mengenali pola batik yang berulang pada kain</td>
+                </tr>
+                <tr>
+                    <td><strong>3</strong></td>
+                    <td><strong>Abstraksi</strong></td>
+                    <td>Fokus pada informasi penting, mengabaikan detail yang tidak relevan</td>
+                    <td>Melihat peta kota: hanya jalan utama, bukan setiap rumah</td>
+                </tr>
+                <tr>
+                    <td><strong>4</strong></td>
+                    <td><strong>Perancangan Algoritma</strong></td>
+                    <td>Menyusun langkah-langkah solusi secara terstruktur dan logis</td>
+                    <td>Resep masakan: langkah-langkah urut untuk hasil tertentu</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="value-box">
+            <h5>🌿 Refleksi: Empat Pilar dalam Kehidupan Muslim</h5>
+            <p>Keempat pilar berpikir komputasional ternyata sejalan dengan cara Islam mengajarkan umatnya untuk menghadapi kehidupan:</p>
+            <ul>
+                <li><strong>Dekomposisi</strong> → Memecah masalah dengan sabar, tidak panik (QS. Al-Insyirah: 5-6)</li>
+                <li><strong>Pengenalan Pola</strong> → Belajar dari sejarah dan pengalaman umat terdahulu (QS. Ali Imran: 137)</li>
+                <li><strong>Abstraksi</strong> → Fokus pada hal yang bermanfaat, tinggalkan yang tidak perlu (HR. Tirmidzi)</li>
+                <li><strong>Perancangan Algoritma</strong> → Bekerja dengan itqan (profesional) dan terencana (HR. Baihaqi)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- DEKOMPOSISI -->
+    <div class="content-block" id="materi">
+        <h2>B. Dekomposisi: Memecah Masalah Besar</h2>
+
+        <h3>1. Pengertian Dekomposisi</h3>
+        <p><strong>Dekomposisi</strong> adalah proses memecah masalah atau sistem yang kompleks menjadi bagian-bagian yang lebih kecil, sederhana, dan lebih mudah dikelola. Dengan dekomposisi, masalah yang tampak menakutkan menjadi serangkaian tugas yang dapat diselesaikan satu per satu.</p>
+
+        <p>Prinsip ini sangat penting karena <strong>otak manusia memiliki keterbatasan</strong> dalam memproses informasi secara bersamaan. Dengan memecah masalah, kita dapat fokus pada satu bagian pada satu waktu, mengurangi beban kognitif, dan meningkatkan akurasi solusi.</p>
+
+        <h3>2. Contoh Dekomposisi dalam Kehidupan</h3>
+
+        <div class="case-box">
+            <h5>📋 Studi Kasus: Merencanakan Acara Maulid Nabi  di Madrasah</h5>
+            <p><strong>Masalah besar:</strong> Mengadakan peringatan Maulid Nabi ﷺ untuk 300 siswa dalam waktu 2 minggu.</p>
+            <p><strong>Dekomposisi menjadi sub-masalah:</strong></p>
+            <ul>
+                <li><strong>Sub 1 - Kepanitiaan:</strong> Menentukan ketua, sekretaris, bendahara, seksi acara, konsumsi, dokumentasi</li>
+                <li><strong>Sub 2 - Tempat & Waktu:</strong> Memesan aula, menentukan tanggal, mengatur layout kursi</li>
+                <li><strong>Sub 3 - Acara:</strong> Menyusun rundown: pembukaan, tilawah, ceramah, shalawatan, doa, penutup</li>
+                <li><strong>Sub 4 - Konsumsi:</strong> Menghitung kebutuhan snack 300 orang, memilih menu halal, mengatur distribusi</li>
+                <li><strong>Sub 5 - Dokumentasi:</strong> Menyiapkan kamera, menentukan angle, membuat laporan foto/video</li>
+            </ul>
+            <p><strong>Hasil:</strong> Setiap sub-masalah dapat ditangani oleh tim kecil dengan tanggung jawab yang jelas.</p>
+        </div>
+
+        <div class="example-box">
+            <h5>💡 Contoh Lain: Persiapan Ujian Akhir Semester</h5>
+            <p><strong>Masalah:</strong> Ujian 8 mata pelajaran dalam 1 minggu.</p>
+            <p><strong>Dekomposisi:</strong></p>
+            <ol>
+                <li>Buat daftar semua mata pelajaran yang diujikan</li>
+                <li>Identifikasi materi yang belum dikuasai untuk setiap mapel</li>
+                <li>Alokasikan waktu belajar per hari (misal: 2 mapel/hari)</li>
+                <li>Siapkan bahan belajar: catatan, soal latihan, video pembelajaran</li>
+                <li>Tentukan target: minimal 75% materi dikuasai sebelum ujian</li>
+                <li>Evaluasi setiap malam: apa yang sudah dipelajari, apa yang perlu diulang</li>
+            </ol>
+        </div>
+
+        <h3>3. Nilai Karakter: Kesabaran & Ketelitian</h3>
+        <p>Dekomposisi melatih dua nilai karakter penting:</p>
+        <ul>
+            <li><strong>Kesabaran:</strong> Tidak terburu-buru menyelesaikan masalah sekaligus, tetapi sabar mengurai satu per satu</li>
+            <li><strong>Ketelitian:</strong> Memastikan tidak ada bagian penting yang terlewat saat memecah masalah</li>
+        </ul>
+
+        <div class="quote-box">
+            <p>Maka sesungguhnya bersama kesulitan ada kemudahan. Sesungguhnya bersama kesulitan ada kemudahan.</p>
+            <cite>— QS. Al-Insyirah: 5-6</cite>
+        </div>
+
+        <p>Ayat ini mengajarkan bahwa setiap kesulitan (masalah besar) pasti ada kemudahan (solusi) jika kita sabar menguraikannya. Inilah esensi dekomposisi dalam perspektif Islami.</p>
+    </div>
+
+    <!-- PENGENALAN POLA -->
+    <div class="content-block">
+        <h2>C. Pengenalan Pola: Mencari Keteraturan</h2>
+
+        <h3>1. Pengertian Pengenalan Pola</h3>
+        <p><strong>Pengenalan pola</strong> (<em>Pattern Recognition</em>) adalah kemampuan untuk mengidentifikasi kesamaan, tren, atau keteraturan dalam data, masalah, atau situasi. Dengan mengenali pola, kita dapat <strong>memprediksi</strong> apa yang akan terjadi dan <strong>menyelesaikan masalah baru</strong> dengan menggunakan solusi dari masalah serupa yang pernah dihadapi.</p>
+
+        <h3>2. Contoh Pengenalan Pola</h3>
+
+        <div class="example-box">
+            <h5>💡 Contoh 1: Pola dalam Jadwal Shalat 5 Waktu</h5>
+            <p>Shalat 5 waktu memiliki <strong>pola yang konsisten</strong>:</p>
+            <ul>
+                <li>Selalu diawali dengan niat dan takbiratul ihram</li>
+                <li>Selalu membaca Al-Fatihah di setiap rakaat</li>
+                <li>Selalu diakhiri dengan salam</li>
+                <li>Perbedaan hanya pada jumlah rakaat dan bacaan tertentu</li>
+            </ul>
+            <p>Dengan mengenali pola ini, seorang Muslim dapat dengan mudah mempelajari shalat baru (misal: shalat sunnah) karena strukturnya sudah familiar.</p>
+        </div>
+
+        <div class="example-box">
+            <h5>💡 Contoh 2: Pola dalam Struktur HTML</h5>
+            <p>Semua halaman HTML memiliki <strong>pola struktur yang sama</strong>:</p>
+            <ul>
+                <li>Dimulai dengan <code>&lt;!DOCTYPE html&gt;</code></li>
+                <li>Memiliki <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, dan <code>&lt;body&gt;</code></li>
+                <li>Head berisi metadata, body berisi konten</li>
+            </ul>
+            <p>Dengan mengenali pola ini, siswa dapat membuat halaman HTML baru tanpa harus menghafal dari nol — cukup ikuti pola yang sudah ada.</p>
+        </div>
+
+        <h3>3. Nilai Karakter: Kepekaan & Berbagi Pengalaman</h3>
+        <p>Pengenalan pola melatih:</p>
+        <ul>
+            <li><strong>Kepekaan:</strong> Peka terhadap lingkungan, noticing patterns dalam kehidupan sehari-hari</li>
+            <li><strong>Berbagi Pengalaman:</strong> Ketika kita mengenali pola, kita dapat berbagi dengan orang lain agar mereka juga mendapat kemudahan</li>
+        </ul>
+
+        <div class="quote-box">
+            <p>Sebaik-baik manusia adalah yang paling bermanfaat bagi orang lain.</p>
+            <cite>— HR. Ahmad</cite>
+        </div>
+
+        <p>Dengan berbagi pola yang kita kenali, kita menjadi bermanfaat bagi sesama — inilah implementasi nilai karakter dalam berpikir komputasional.</p>
+    </div>
+
+    <!-- ABSTRAKSI -->
+    <div class="content-block">
+        <h2>D. Abstraksi: Fokus pada yang Penting</h2>
+
+        <h3>1. Pengertian Abstraksi</h3>
+        <p><strong>Abstraksi</strong> adalah proses menyaring informasi — <strong>fokus pada detail yang penting</strong> dan mengabaikan detail yang tidak relevan untuk menyelesaikan masalah tertentu. Abstraksi membantu kita menyederhanakan kompleksitas tanpa kehilangan esensi.</p>
+
+        <h3>2. Contoh Abstraksi</h3>
+
+        <div class="case-box">
+            <h5>📋 Studi Kasus: Membuat Profil Madrasah di Website</h5>
+            <p><strong>Masalah:</strong> Membuat halaman web profil MAS Diniyah Limo Jurai.</p>
+            <p><strong>Informasi yang RELEVAN (dipertahankan):</strong></p>
+            <ul>
+                <li>Nama madrasah, alamat, visi-misi</li>
+                <li>Program unggulan, kontak, foto gedung</li>
+                <li>Sejarah singkat, jumlah siswa dan guru</li>
+            </ul>
+            <p><strong>Informasi yang TIDAK RELEVAN (diabaikan):</strong></p>
+            <ul>
+                <li>Warna cat dinding kelas</li>
+                <li>Nama semua siswa satu per satu</li>
+                <li>Detail menu kantin setiap hari</li>
+            </ul>
+            <p><strong>Hasil:</strong> Halaman web yang fokus, informatif, dan tidak membingungkan pembaca.</p>
+        </div>
+
+        <div class="example-box">
+            <h5>💡 Contoh: Peta vs Foto Udara</h5>
+            <p><strong>Foto udara</strong> menampilkan SEMUA detail: setiap rumah, pohon, mobil, orang. Terlalu banyak informasi!</p>
+            <p><strong>Peta</strong> hanya menampilkan yang PENTING: jalan utama, landmark, batas wilayah. Detail lain diabaikan.</p>
+            <p>Inilah abstraksi — memilih informasi yang relevan untuk tujuan tertentu.</p>
+        </div>
+
+        <h3>3. Nilai Karakter: Kejujuran & Prioritas</h3>
+        <p>Abstraksi melatih:</p>
+        <ul>
+            <li><strong>Kejujuran:</strong> Jujur dalam memilih informasi — tidak menambah yang tidak perlu, tidak mengurangi yang penting</li>
+            <li><strong>Prioritas:</strong> Mampu membedakan mana yang penting dan mana yang tidak</li>
+        </ul>
+
+        <div class="quote-box">
+            <p>Tinggalkanlah apa yang meragukanmu kepada apa yang tidak meragukanmu.</p>
+            <cite>— HR. Tirmidzi</cite>
+        </div>
+
+        <p>Hadits ini mengajarkan prinsip abstraksi: fokus pada yang jelas dan penting, tinggalkan yang tidak perlu. Ini adalah adab seorang Muslim dalam berpikir dan bertindak.</p>
+    </div>
+
+    <!-- PERANCANGAN ALGORITMA -->
+    <div class="content-block">
+        <h2>E. Perancangan Algoritma: Menyusun Solusi</h2>
+
+        <h3>1. Pengertian Perancangan Algoritma</h3>
+        <p><strong>Perancangan algoritma</strong> adalah proses menyusun langkah-langkah solusi secara terstruktur, logis, dan terurut. Ini adalah tahap di mana ketiga pilar sebelumnya (dekomposisi, pengenalan pola, abstraksi) <strong>digabungkan</strong> untuk menciptakan solusi yang dapat dieksekusi.</p>
+
+        <h3>2. Contoh Perancangan Algoritma</h3>
+
+        <div class="example-box">
+            <h5>💡 Contoh: Algoritma Persiapan Ujian</h5>
+            <p><strong>Masalah:</strong> Siswa ingin mendapatkan nilai minimal 80 di ujian Informatika.</p>
+            <p><strong>Algoritma:</strong></p>
+            <ol>
+                <li>IDENTIFIKASI materi yang akan diujikan (bab 1-3)</li>
+                <li>DEKOMPOSISI menjadi sub-topik per bab</li>
+                <li>KENALI POLA soal yang sering keluar dari ujian sebelumnya</li>
+                <li>ABSTRAKSI: fokus pada konsep penting, abaikan detail minor</li>
+                <li>BUAT jadwal belajar: 2 jam/hari selama 5 hari</li>
+                <li>LATIHAN soal setiap hari, evaluasi hasil</li>
+                <li>REVIEW materi yang masih lemah di hari terakhir</li>
+                <li>ISTIRAHAT cukup sebelum ujian</li>
+            </ol>
+            <p><strong>Output:</strong> Persiapan matang, nilai target tercapai insya Allah.</p>
+        </div>
+
+        <div class="code-block">
+<span class="comment">// Pseudokode: Algoritma Persiapan Ujian</span>
+<span class="keyword">MULAI</span>
+    <span class="keyword">INPUT</span> daftar_materi, waktu_tersedia
+    <span class="keyword">DEKOMPOSISI</span> daftar_materi menjadi sub_topik
+    <span class="keyword">KENALI_POLA</span> dari soal ujian sebelumnya
+    <span class="keyword">ABSTRAKSI</span> fokus pada konsep penting
+    
+    <span class="keyword">UNTUK</span> setiap hari <span class="keyword">DARI</span> 1 <span class="keyword">SAMPAI</span> 5 <span class="keyword">LAKUKAN</span>
+        <span class="keyword">BELAJAR</span> sub_topik[hari] selama 2 jam
+        <span class="keyword">LATIHAN</span> soal terkait
+        <span class="keyword">EVALUASI</span> pemahaman
+    <span class="keyword">AKHIR UNTUK</span>
+    
+    <span class="keyword">JIKA</span> pemahaman >= 80% <span class="keyword">MAKA</span>
+        <span class="keyword">TAMPILKAN</span> "Siap ujian! Bismillah!"
+    <span class="keyword">LAINNYA</span>
+        <span class="keyword">TAMPILKAN</span> "Perlu review tambahan"
+    <span class="keyword">AKHIR JIKA</span>
+<span class="keyword">SELESAI</span>
+        </div>
+
+        <h3>3. Nilai Karakter: Kreativitas & Kepedulian</h3>
+        <p>Perancangan algoritma melatih:</p>
+        <ul>
+            <li><strong>Kreativitas:</strong> Mencari cara baru dan efektif untuk menyelesaikan masalah</li>
+            <li><strong>Kepedulian:</strong> Merancang solusi yang tidak hanya untuk diri sendiri, tetapi juga bermanfaat bagi orang lain</li>
+        </ul>
+
+        <div class="quote-box">
+            <p>Sesungguhnya Allah mencintai jika seseorang di antara kamu melakukan suatu pekerjaan, ia melakukannya dengan itqan (tekun, profesional, dan sempurna).</p>
+            <cite>— HR. Baihaqi</cite>
+        </div>
+
+        <p>Itqan dalam bekerja berarti merencanakan dengan matang, melaksanakan dengan teliti, dan menghasilkan karya yang berkualitas. Inilah esensi perancangan algoritma yang baik.</p>
+    </div>
+
+    <!-- INTEGRASI NILAI KARAKTER -->
+    <div class="content-block">
+        <h2>F. Integrasi Nilai Karakter Islami</h2>
+
+        <p>Berpikir komputasional bukan sekadar keterampilan teknis — ia adalah <strong>wadah penanaman nilai karakter</strong>. Berikut integrasi lengkap keempat pilar dengan nilai Islami:</p>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Pilar CT</th>
+                    <th>Definisi</th>
+                    <th>Nilai Karakter</th>
+                    <th>Dalil/Referensi</th>
+                    <th>Penerapan di Madrasah</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Dekomposisi</strong></td>
+                    <td>Memecah masalah besar menjadi bagian kecil</td>
+                    <td>Kesabaran & Ketelitian</td>
+                    <td>"Sesungguhnya bersama kesulitan ada kemudahan" (QS. Al-Insyirah: 6)</td>
+                    <td>Sabar mengurai materi ujian per bab, tidak panik</td>
+                </tr>
+                <tr>
+                    <td><strong>Pengenalan Pola</strong></td>
+                    <td>Mencari kesamaan dan keteraturan</td>
+                    <td>Kepekaan & Berbagi</td>
+                    <td>"Sebaik-baik manusia adalah yang paling bermanfaat" (HR. Ahmad)</td>
+                    <td>Mengenali pola soal, berbagi tips dengan teman</td>
+                </tr>
+                <tr>
+                    <td><strong>Abstraksi</strong></td>
+                    <td>Fokus pada hal penting, abaikan yang tidak relevan</td>
+                    <td>Kejujuran & Prioritas</td>
+                    <td>"Tinggalkanlah apa yang meragukanmu" (HR. Tirmidzi)</td>
+                    <td>Fokus belajar, hindari distraksi media sosial</td>
+                </tr>
+                <tr>
+                    <td><strong>Perancangan Algoritma</strong></td>
+                    <td>Menyusun langkah solusi terstruktur</td>
+                    <td>Kreativitas & Kepedulian</td>
+                    <td>"Allah mencintai pekerjaan yang dilakukan dengan itqan" (HR. Baihaqi)</td>
+                    <td>Merancang proyek web yang bermanfaat bagi madrasah</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="value-box">
+            <h5>🌿 Refleksi: Berpikir Komputasional sebagai Ibadah</h5>
+            <p>Setiap kali kita menggunakan berpikir komputasional untuk menyelesaikan masalah dengan baik, kita sebenarnya sedang <strong>beribadah</strong> — karena kita menggunakan akal yang Allah berikan untuk kemaslahatan. Sebagaimana firman Allah:</p>
+        </div>
+
+        <div class="quote-box">
+            <p>Sesungguhnya dalam penciptaan langit dan bumi, dan silih bergantinya malam dan siang terdapat tanda-tanda bagi orang-orang yang berakal.</p>
+            <cite>— QS. Ali Imran: 190</cite>
+        </div>
+
+        <p>Akal adalah amanah. Berpikir komputasional adalah cara kita mengoptimalkan amanah tersebut untuk menyelesaikan masalah, membantu sesama, dan mendekatkan diri kepada Allah melalui karya yang bermanfaat.</p>
+    </div>
+
+    <!-- RANGKUMAN -->
+    <div class="content-block">
+        <div class="summary-box">
+            <h4>📌 Rangkuman Pertemuan 02</h4>
+            <ul>
+                <li>Berpikir komputasional dipopulerkan oleh Jeannette Wing (2006) sebagai kemampuan dasar abad 21</li>
+                <li>Empat pilar: Dekomposisi, Pengenalan Pola, Abstraksi, Perancangan Algoritma</li>
+                <li>Dekomposisi melatih kesabaran & ketelitian (QS. Al-Insyirah: 6)</li>
+                <li>Pengenalan pola melatih kepekaan & berbagi pengalaman (HR. Ahmad)</li>
+                <li>Abstraksi melatih kejujuran & prioritas (HR. Tirmidzi)</li>
+                <li>Perancangan algoritma melatih kreativitas & kepedulian (HR. Baihaqi)</li>
+                <li>Berpikir komputasional adalah bentuk ibadah ketika digunakan untuk kemaslahatan</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- UJI FORMATIF -->
+    <div class="uji-formatif-section" id="uji-formatif">
+        <div class="uji-formatif-content">
+            <span class="uji-formatif-badge">Evaluasi Pembelajaran</span>
+            
+            <div class="uji-formatif-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 11l3 3L22 4"/>
+                    <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                </svg>
+            </div>
+
+            <h3 class="uji-formatif-title">Uji <span>Formatif</span> Pertemuan 02</h3>
+            <p class="uji-formatif-desc">
+                Ukur pemahamanmu tentang <strong>Berpikir Komputasional & Nilai Karakter</strong> melalui uji formatif interaktif. Jawab dengan jujur untuk mengetahui penguasaanmu terhadap empat pilar CT dan integrasi nilai Islami.
+            </p>
+
+            <div class="uji-formatif-features">
+                <div class="uji-feature">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+                    <span>10 Soal</span>
+                </div>
+                <div class="uji-feature">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    <span>± 15 Menit</span>
+                </div>
+                <div class="uji-feature">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <span>Skor Otomatis</span>
+                </div>
+                <div class="uji-feature">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                    <span>Umpan Balik</span>
+                </div>
+            </div>
+
+            <a href="uji-formatif-2.html" class="btn-uji-formatif" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+                Mulai Uji Formatif
+            </a>
+
+            <p class="uji-formatif-note">
+                💡 <em>Tips: Pahami kembali keempat pilar CT dan dalil yang terkait sebelum memulai. Bismillah, semoga sukses!</em>
+            </p>
+        </div>
+    </div>
+
+    <!-- LATIHAN SOAL -->
+    <div class="content-block" id="latihan">
+        <h2>G. Latihan Pemahaman</h2>
+        
+        <div class="quiz-box">
+            <h5>📝 Soal Pilihan Ganda</h5>
+            
+            <div class="quiz-question">
+                <p>1. Berpikir komputasional pertama kali dipopulerkan oleh...</p>
+                <ul class="quiz-options">
+                    <li data-label="A">Donald Knuth</li>
+                    <li data-label="B">Jeannette Wing</li>
+                    <li data-label="C">Alan Turing</li>
+                    <li data-label="D">Tim Berners-Lee</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>2. Memecah masalah besar menjadi bagian-bagian kecil yang lebih mudah dikelola disebut...</p>
+                <ul class="quiz-options">
+                    <li data-label="A">Abstraksi</li>
+                    <li data-label="B">Dekomposisi</li>
+                    <li data-label="C">Pengenalan Pola</li>
+                    <li data-label="D">Algoritma</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>3. Ketika seorang siswa mengenali bahwa semua halaman HTML memiliki struktur head-body yang sama, ia sedang melakukan...</p>
+                <ul class="quiz-options">
+                    <li data-label="A">Dekomposisi</li>
+                    <li data-label="B">Abstraksi</li>
+                    <li data-label="C">Pengenalan Pola</li>
+                    <li data-label="D">Perancangan Algoritma</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>4. Fokus pada informasi penting dan mengabaikan detail yang tidak relevan adalah definisi dari...</p>
+                <ul class="quiz-options">
+                    <li data-label="A">Dekomposisi</li>
+                    <li data-label="B">Abstraksi</li>
+                    <li data-label="C">Pengenalan Pola</li>
+                    <li data-label="D">Algoritma</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>5. Menyusun langkah-langkah solusi secara terstruktur dan logis disebut...</p>
+                <ul class="quiz-options">
+                    <li data-label="A">Dekomposisi</li>
+                    <li data-label="B">Abstraksi</li>
+                    <li data-label="C">Pengenalan Pola</li>
+                    <li data-label="D">Perancangan Algoritma</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>6. Nilai karakter yang paling utama dilatih melalui dekomposisi adalah...</p>
+                <ul class="quiz-options">
+                    <li data-label="A">Kreativitas & Kepedulian</li>
+                    <li data-label="B">Kejujuran & Prioritas</li>
+                    <li data-label="C">Kesabaran & Ketelitian</li>
+                    <li data-label="D">Kepekaan & Berbagi</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>7. Dalil "Sesungguhnya bersama kesulitan ada kemudahan" (QS. Al-Insyirah: 6) paling relevan dengan pilar...</p>
+                <ul class="quiz-options">
+                    <li data-label="A">Dekomposisi</li>
+                    <li data-label="B">Pengenalan Pola</li>
+                    <li data-label="C">Abstraksi</li>
+                    <li data-label="D">Perancangan Algoritma</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>8. Ketika membuat peta kota, kita hanya menampilkan jalan utama dan mengabaikan detail setiap rumah. Ini adalah contoh...</p>
+                <ul class="quiz-options">
+                    <li data-label="A">Dekomposisi</li>
+                    <li data-label="B">Abstraksi</li>
+                    <li data-label="C">Pengenalan Pola</li>
+                    <li data-label="D">Algoritma</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>9. Hadits "Sebaik-baik manusia adalah yang paling bermanfaat bagi orang lain" (HR. Ahmad) terkait dengan nilai karakter dari pilar...</p>
+                <ul class="quiz-options">
+                    <li data-label="A">Dekomposisi</li>
+                    <li data-label="B">Pengenalan Pola</li>
+                    <li data-label="C">Abstraksi</li>
+                    <li data-label="D">Perancangan Algoritma</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>10. Urutan yang benar dalam menerapkan berpikir komputasional untuk menyelesaikan masalah adalah...</p>
+                <ul class="quiz-options">
+                    <li data-label="A">Abstraksi → Dekomposisi → Pola → Algoritma</li>
+                    <li data-label="B">Dekomposisi → Pola → Abstraksi → Algoritma</li>
+                    <li data-label="C">Pola → Dekomposisi → Algoritma → Abstraksi</li>
+                    <li data-label="D">Algoritma → Abstraksi → Dekomposisi → Pola</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="quiz-box">
+            <h5>📝 Soal Esai</h5>
+            <div class="quiz-question">
+                <p>1. Jelaskan dengan bahasa sendiri apa yang dimaksud dengan berpikir komputasional dan mengapa kemampuan ini penting di abad 21!</p>
+            </div>
+            <div class="quiz-question">
+                <p>2. Berikan contoh konkret penerapan dekomposisi dalam kehidupan sehari-hari di lingkungan madrasah (minimal 1 contoh)!</p>
+            </div>
+            <div class="quiz-question">
+                <p>3. Bagaimana pengenalan pola dapat membantu seorang siswa dalam belajar? Berikan 2 contoh!</p>
+            </div>
+            <div class="quiz-question">
+                <p>4. Jelaskan hubungan antara abstraksi dengan nilai karakter kejujuran dan prioritas dalam Islam!</p>
+            </div>
+            <div class="quiz-question">
+                <p>5. Rancanglah algoritma sederhana (5-7 langkah) untuk menyelesaikan masalah: "Mempersiapkan diri shalat berjamaah di madrasah"! Sertakan nilai karakter yang dilatih!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TUGAS PRAKTIK -->
+    <div class="content-block" id="tugas">
+        <h2>H. Tugas Praktik</h2>
+        
+        <div class="task-box">
+            <h5>📋 Tugas Individu (Dikumpulkan Pertemuan Berikutnya)</h5>
+            <ol>
+                <li>Pilih 1 masalah kompleks yang kamu hadapi saat ini (misal: nilai kurang baik, waktu tidak cukup, dll). Terapkan <strong>dekomposisi</strong> untuk memecahnya menjadi minimal 4 sub-masalah. Tuliskan dalam bentuk daftar!</li>
+                <li>Amati lingkungan madrasah selama 1 hari. Identifikasi <strong>3 pola</strong> yang kamu temukan (misal: pola jadwal, pola perilaku, pola kegiatan). Tuliskan dan jelaskan manfaat mengenali pola tersebut!</li>
+                <li>Buatlah <strong>peta konsep (mind map)</strong> tentang "Cara Belajar Efektif" dengan menerapkan prinsip <strong>abstraksi</strong> — hanya masukkan informasi penting, buang yang tidak perlu. Gunakan kertas A4 atau aplikasi mind mapping gratis!</li>
+                <li>Rancang <strong>algoritma</strong> (dalam bentuk teks deskripsi) untuk menyelesaikan masalah: "Mengorganisir acara bakti sosial di madrasah". Sertakan minimal 8 langkah yang terurut!</li>
+                <li>Refleksi: Tuliskan 1 paragraf tentang bagaimana keempat pilar berpikir komputasional dapat membantu kamu menjadi siswa yang lebih baik dan Muslim yang lebih taat!</li>
+            </ol>
+        </div>
+
+        <div class="task-box" style="border-color: var(--gold); background: linear-gradient(135deg, #fff8f0, #fff3e6);">
+            <h5 style="color: #b8860b;">⭐ Tugas Tambahan (Bonus Nilai)</h5>
+            <ol>
+                <li>Buatlah <strong>infografis digital</strong> (gunakan Canva gratis) yang menjelaskan keempat pilar berpikir komputasional dengan contoh dari kehidupan santri. Share di media sosial dengan hashtag #BerpikirKomputasionalDiniyah!</li>
+                <li>Wawancarai 1 guru atau ustaz di madrasah tentang bagaimana mereka menerapkan prinsip dekomposisi atau abstraksi dalam mengajar. Tuliskan hasil wawancara minimal 1 halaman!</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- REFERENSI -->
+    <div class="content-block">
+        <h2>📚 Referensi Pertemuan 02</h2>
+        <ul>
+            <li>Wing, J. M. (2006). "Computational Thinking." <em>Communications of the ACM</em>, 49(3), 33–35. DOI: 10.1145/1118178.1118215.</li>
+            <li>Barr, V. & Stephenson, C. (2011). "Bringing Computational Thinking to K-12 Students." <em>ACM Inroads</em>, 2(1), 48-54.</li>
+            <li>Shute, V. J., Sun, C., & Asbell, J. (2017). "Computational Thinking: Toward a Definition." <em>ETS Research Report</em>. Princeton: ETS.</li>
+            <li>Rinaldi Munir & Leony Lidya. (2023). <em>Berpikir Komputasional: Fondasi Problem Solving Abad 21</em>. Yogyakarta: ANDI Publisher.</li>
+            <li>Kemendikbudristek RI. (2024). <em>Informatika untuk SMA/MA Kelas XII</em>. Jakarta: Pusat Kurikulum dan Perbukuan.</li>
+            <li>Kementerian Agama RI. (2024). <em>Panduan Integrasi Nilai Karakter dalam Pembelajaran Madrasah</em>. Jakarta: Direktorat KSKK Madrasah.</li>
+        </ul>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="meeting-nav">
+        <a href="1.html" class="nav-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <div>
+                <div class="nav-label">Kembali</div>
+                <div class="nav-title">Pertemuan 01: Pengertian Algoritma</div>
+            </div>
+        </a>
+        <a href="3.html" class="nav-btn next">
+            <div>
+                <div class="nav-label">Selanjutnya</div>
+                <div class="nav-title">Pertemuan 03: Cara Menyajikan Algoritma</div>
+            </div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <h4>MAS DINIYAH LIMO JURAI</h4>
+    <p>Jln. Raya Sungai Pua, Kabupaten Agam, Sumatera Barat</p>
+    <p style="margin-top: 12px; font-size: 0.8rem; opacity: 0.6;">
+        © 2026 — Buku Informatika Kelas XII oleh JEFRI, S.Pd<br>
+        <em>"Menuntut ilmu adalah ibadah, menyebarkannya adalah sedekah."</em>
+    </p>
+</footer>
+
+<!-- PRINT BUTTON -->
+<button class="print-button" onclick="window.print()" title="Cetak atau Simpan sebagai PDF">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
+        <path d="M6 14h12v8H6z"/>
+    </svg>
+    Cetak PDF
+</button>
+
+</body>
+</html>
