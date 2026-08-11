@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 03 — Cara Menyajikan Algoritma | INFORMATIKA KELAS XII</title>
+    <style>
+        :root {
+            --primary: #1a1a2e; --secondary: #16213e; --accent: #0f3460;
+            --highlight: #e94560; --gold: #d4a574; --light: #f8f9fa;
+            --text: #2d3436; --text-light: #636e72; --white: #ffffff;
+            --shadow: 0 20px 60px rgba(0,0,0,0.08); --shadow-hover: 0 30px 80px rgba(0,0,0,0.12);
+            --radius: 16px; --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--light); color: var(--text); line-height: 1.8; overflow-x: hidden; }
+        .top-bar { background: var(--primary); color: var(--white); padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .top-bar .logo { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 0.95rem; }
+        .top-bar .logo a { color: var(--white); text-decoration: none; transition: var(--transition); }
+        .top-bar .logo a:hover { color: var(--gold); }
+        .top-bar .nav-links { display: flex; gap: 20px; align-items: center; }
+        .top-bar .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
+        .top-bar .nav-links a:hover { color: var(--gold); }
+        .meeting-indicator { background: rgba(233,69,96,0.15); border: 1px solid rgba(233,69,96,0.3); color: var(--highlight); padding: 4px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; }
+        .page-hero { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%); color: var(--white); padding: 80px 20px 60px; position: relative; overflow: hidden; }
+        .page-hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(212,165,116,0.08) 0%, transparent 70%); }
+        .page-hero-content { max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+        .breadcrumb { display: flex; gap: 10px; align-items: center; font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+        .breadcrumb a { color: var(--gold); text-decoration: none; }
+        .page-hero .meeting-number { display: inline-block; background: rgba(233,69,96,0.2); border: 1px solid rgba(233,69,96,0.4); color: var(--highlight); padding: 6px 18px; border-radius: 30px; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+        .page-hero h1 { font-size: 2.8rem; font-weight: 800; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.5px; }
+        .page-hero h1 span { color: var(--gold); }
+        .page-hero .subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.75); max-width: 700px; font-weight: 300; }
+        .meta-info { display: flex; gap: 24px; margin-top: 28px; flex-wrap: wrap; }
+        .meta-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+        .meta-item svg { width: 16px; height: 16px; color: var(--gold); }
+        .main-content { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+        .content-block { background: var(--white); border-radius: var(--radius); padding: 40px; margin-bottom: 30px; box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.04); }
+        .content-block h2 { font-size: 1.6rem; font-weight: 700; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--light); }
+        .content-block h3 { font-size: 1.25rem; font-weight: 600; color: var(--accent); margin: 28px 0 14px; }
+        .content-block h4 { font-size: 1.05rem; font-weight: 600; color: var(--primary); margin: 20px 0 10px; }
+        .content-block p { font-size: 0.95rem; color: var(--text); line-height: 1.9; margin-bottom: 14px; }
+        .content-block ul, .content-block ol { padding-left: 24px; margin-bottom: 16px; }
+        .content-block li { font-size: 0.95rem; margin-bottom: 10px; line-height: 1.8; }
+        .content-block strong { color: var(--primary); }
+        .objectives { background: linear-gradient(135deg, #f0f7ff, #e8f4fd); border: 1px solid rgba(15,52,96,0.1); border-radius: 12px; padding: 28px; margin-bottom: 30px; }
+        .objectives h4 { color: var(--accent); font-size: 1rem; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+        .objectives ul { list-style: none; padding: 0; }
+        .objectives li { padding: 8px 0 8px 32px; position: relative; font-size: 0.9rem; color: var(--text); }
+        .objectives li::before { content: '✓'; position: absolute; left: 0; top: 8px; width: 22px; height: 22px; background: var(--accent); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; }
+        .quote-box { background: linear-gradient(135deg, #fff8f0, #fff3e6); border-left: 4px solid var(--gold); border-radius: 12px; padding: 24px 28px; margin: 24px 0; font-style: italic; color: var(--text); position: relative; }
+        .quote-box::before { content: '"'; position: absolute; top: -10px; left: 16px; font-size: 4rem; color: var(--gold); font-family: Georgia, serif; line-height: 1; }
+        .quote-box p { padding-left: 30px; margin-bottom: 8px; }
+        .quote-box cite { display: block; padding-left: 30px; font-size: 0.85rem; color: var(--text-light); font-style: normal; font-weight: 600; }
+        .example-box { background: linear-gradient(135deg, #f0f7ff, #e8f4fd); border: 1px solid rgba(15,52,96,0.1); border-radius: 12px; padding: 24px; margin: 20px 0; }
+        .example-box h5 { color: var(--accent); font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .case-box { background: linear-gradient(135deg, #fff8f0, #fff3e6); border: 1px solid rgba(212,165,116,0.2); border-radius: 12px; padding: 24px; margin: 20px 0; }
+        .case-box h5 { color: #b8860b; font-size: 0.95rem; margin-bottom: 12px; }
+        .value-box { background: linear-gradient(135deg, #f0fff4, #e6ffed); border: 1px solid rgba(46,204,113,0.15); border-radius: 12px; padding: 24px; margin: 20px 0; }
+        .value-box h5 { color: #27ae60; font-size: 0.95rem; margin-bottom: 12px; }
+        .code-block { background: #1e1e2e; color: #cdd6f4; padding: 24px 28px; border-radius: 12px; font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.85rem; line-height: 1.8; overflow-x: auto; margin: 20px 0; }
+        .code-block .comment { color: #6c7086; font-style: italic; }
+        .code-block .keyword { color: #cba6f7; font-weight: 600; }
+        .code-block .string { color: #a6e3a1; }
+        .comparison-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .comparison-table thead { background: var(--primary); color: var(--white); }
+        .comparison-table th { padding: 14px 18px; text-align: left; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; }
+        .comparison-table td { padding: 12px 18px; font-size: 0.88rem; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--text); }
+        .comparison-table tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
+        .flowchart { background: var(--white); border: 2px dashed rgba(15,52,96,0.2); border-radius: 12px; padding: 30px; margin: 24px 0; text-align: center; }
+        .flow-step { display: inline-block; padding: 10px 20px; margin: 6px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; }
+        .flow-start { background: var(--accent); color: var(--white); border-radius: 30px; }
+        .flow-process { background: rgba(15,52,96,0.1); color: var(--accent); border: 1px solid var(--accent); }
+        .flow-decision { background: rgba(212,165,116,0.15); color: #b8860b; border: 1px solid var(--gold); }
+        .flow-end { background: var(--highlight); color: var(--white); border-radius: 30px; }
+        .flow-arrow { color: var(--text-light); font-size: 1.2rem; margin: 0 4px; }
+        .quiz-box { background: linear-gradient(135deg, #fff5f7, #ffe8ec); border: 1px solid rgba(233,69,96,0.15); border-radius: 12px; padding: 24px; margin: 20px 0; }
+        .quiz-box h5 { color: var(--highlight); font-size: 0.95rem; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+        .quiz-question { background: var(--white); padding: 16px 20px; border-radius: 10px; margin-bottom: 12px; border-left: 3px solid var(--highlight); }
+        .quiz-question p { font-weight: 600; margin-bottom: 10px; font-size: 0.9rem; }
+        .quiz-options { list-style: none; padding: 0; }
+        .quiz-options li { padding: 6px 0 6px 28px; position: relative; font-size: 0.88rem; margin-bottom: 4px; }
+        .quiz-options li::before { content: attr(data-label); position: absolute; left: 0; top: 6px; width: 20px; height: 20px; background: rgba(233,69,96,0.1); color: var(--highlight); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; }
+        .task-box { background: linear-gradient(135deg, #f0f7ff, #e8f4fd); border: 2px solid var(--accent); border-radius: 12px; padding: 28px; margin: 24px 0; }
+        .task-box h5 { color: var(--accent); font-size: 1rem; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+        .task-box ol { padding-left: 20px; }
+        .task-box li { margin-bottom: 10px; font-size: 0.9rem; }
+        .summary-box { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: var(--white); border-radius: 12px; padding: 30px; margin: 30px 0; }
+        .summary-box h4 { color: var(--gold); font-size: 1.1rem; margin-bottom: 16px; }
+        .summary-box ul { list-style: none; padding: 0; }
+        .summary-box li { padding: 8px 0 8px 28px; position: relative; color: rgba(255,255,255,0.9); font-size: 0.9rem; }
+        .summary-box li::before { content: '◆'; position: absolute; left: 0; color: var(--gold); }
+        .uji-formatif-section { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%); border-radius: var(--radius); padding: 50px 40px; margin: 40px 0; text-align: center; position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(26,26,46,0.25); }
+        .uji-formatif-section::before { content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(212,165,116,0.15) 0%, transparent 70%); animation: pulse 4s ease-in-out infinite; }
+        .uji-formatif-section::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(233,69,96,0.12) 0%, transparent 70%); animation: pulse 5s ease-in-out infinite reverse; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.1); opacity: 1; } }
+        .uji-formatif-content { position: relative; z-index: 2; }
+        .uji-formatif-badge { display: inline-block; background: rgba(212,165,116,0.2); border: 1px solid rgba(212,165,116,0.4); color: var(--gold); padding: 6px 18px; border-radius: 30px; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 18px; }
+        .uji-formatif-icon { width: 72px; height: 72px; background: linear-gradient(135deg, var(--highlight), #c0392b); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 10px 30px rgba(233,69,96,0.4); animation: bounce 2s ease-in-out infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .uji-formatif-icon svg { width: 36px; height: 36px; color: var(--white); }
+        .uji-formatif-title { font-size: 1.8rem; font-weight: 800; color: var(--white); margin-bottom: 12px; letter-spacing: -0.5px; }
+        .uji-formatif-title span { color: var(--gold); }
+        .uji-formatif-desc { font-size: 1rem; color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 28px; line-height: 1.7; }
+        .uji-formatif-features { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; }
+        .uji-feature { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 30px; color: rgba(255,255,255,0.9); font-size: 0.82rem; font-weight: 500; }
+        .uji-feature svg { width: 16px; height: 16px; color: var(--gold); }
+        .btn-uji-formatif { display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, var(--gold), #b8860b); color: var(--primary); text-decoration: none; padding: 18px 40px; border-radius: 50px; font-size: 1rem; font-weight: 700; letter-spacing: 0.5px; transition: var(--transition); box-shadow: 0 10px 30px rgba(212,165,116,0.4); position: relative; overflow: hidden; }
+        .btn-uji-formatif::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.6s ease; }
+        .btn-uji-formatif:hover::before { left: 100%; }
+        .btn-uji-formatif:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 15px 40px rgba(212,165,116,0.6); }
+        .btn-uji-formatif svg { width: 20px; height: 20px; transition: transform 0.3s ease; }
+        .btn-uji-formatif:hover svg { transform: translateX(4px); }
+        .uji-formatif-note { margin-top: 20px; font-size: 0.8rem; color: rgba(255,255,255,0.6); font-style: italic; }
+        .meeting-nav { display: flex; justify-content: space-between; gap: 20px; margin-top: 40px; padding-top: 30px; border-top: 2px solid var(--light); }
+        .nav-btn { flex: 1; padding: 20px 24px; background: var(--white); border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; text-decoration: none; color: var(--text); transition: var(--transition); display: flex; align-items: center; gap: 14px; }
+        .nav-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
+        .nav-btn.next { justify-content: flex-end; text-align: right; background: linear-gradient(135deg, var(--accent), var(--primary)); color: var(--white); border: none; }
+        .nav-btn .nav-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.7; margin-bottom: 4px; }
+        .nav-btn .nav-title { font-size: 0.95rem; font-weight: 600; }
+        .nav-btn svg { width: 24px; height: 24px; flex-shrink: 0; }
+        footer { background: var(--primary); color: rgba(255,255,255,0.7); text-align: center; padding: 40px 20px; margin-top: 60px; }
+        footer h4 { color: var(--white); font-size: 1.1rem; margin-bottom: 6px; }
+        footer p { font-size: 0.85rem; margin-bottom: 4px; }
+        .print-button { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, var(--highlight), #c0392b); color: white; border: none; padding: 14px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; cursor: pointer; box-shadow: 0 4px 20px rgba(233,69,96,0.4); transition: all 0.3s ease; z-index: 999; display: flex; align-items: center; gap: 8px; }
+        .print-button:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 30px rgba(233,69,96,0.5); }
+        .print-button svg { width: 18px; height: 18px; }
+        @media (max-width: 768px) { .page-hero h1 { font-size: 1.8rem; } .content-block { padding: 24px; } .meeting-nav { flex-direction: column; } .top-bar { padding: 12px 16px; font-size: 0.85rem; } .top-bar .nav-links { gap: 12px; } .top-bar .nav-links a { font-size: 0.75rem; } .comparison-table { font-size: 0.78rem; } .comparison-table th, .comparison-table td { padding: 8px 10px; } .uji-formatif-section { padding: 35px 24px; } .uji-formatif-title { font-size: 1.4rem; } .btn-uji-formatif { padding: 14px 28px; font-size: 0.9rem; } }
+        @media print { .top-bar, .print-button, .meeting-nav, .page-hero::before, .uji-formatif-section::before, .uji-formatif-section::after { display: none !important; } * { background: transparent !important; color: #000 !important; box-shadow: none !important; text-shadow: none !important; } body { background: #fff !important; font-size: 11pt; line-height: 1.5; } .main-content { padding: 0; max-width: 100%; } .page-hero { padding: 15px 0; background: transparent !important; color: #000 !important; page-break-after: avoid; } .page-hero h1 { font-size: 18pt; margin-bottom: 8px; color: #000 !important; } .page-hero .subtitle { font-size: 10pt; color: #333 !important; } .breadcrumb, .meta-item, .page-hero .meeting-number { color: #000 !important; font-size: 9pt; } .content-block { box-shadow: none; border: none; border-bottom: 1px solid #ccc; padding: 15px 0; margin-bottom: 8px; page-break-inside: auto !important; break-inside: auto !important; } .content-block h2 { font-size: 14pt; margin: 12px 0 10px; page-break-after: avoid; } .content-block h3 { font-size: 12pt; margin: 10px 0 8px; page-break-after: avoid; } .content-block p, .content-block ul, .content-block ol { margin: 6px 0; font-size: 10.5pt; orphans: 2; widows: 2; } .comparison-table { width: 100%; font-size: 9pt; margin: 8px 0; page-break-inside: auto !important; break-inside: auto !important; } .comparison-table thead { display: table-header-group; page-break-inside: avoid; break-inside: avoid; background: #1a1a2e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .comparison-table thead th { background: #1a1a2e !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 6px 8px; font-weight: 600; border: 1px solid #000; } .comparison-table tbody tr { page-break-inside: auto; break-inside: auto; } .comparison-table td { padding: 5px 8px; border: 1px solid #999; font-size: 9pt; vertical-align: top; } .comparison-table tbody tr:nth-child(even) { background: #f5f5f5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .example-box, .case-box, .value-box, .quote-box, .objectives, .summary-box { page-break-inside: avoid; break-inside: avoid; border: 1px solid #999; background: #fafafa !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; margin: 8px 0; padding: 12px; font-size: 10pt; } .quiz-box, .task-box { page-break-inside: auto; break-inside: auto; border: 1px solid #999; background: #fafafa !important; margin: 8px 0; padding: 12px; } .quiz-question { page-break-inside: avoid; break-inside: avoid; margin: 8px 0; padding: 8px; border-left: 2px solid #e94560; background: #fff !important; } .code-block { background: #f0f0f0 !important; color: #333 !important; border: 1px solid #999; font-size: 8pt; line-height: 1.4; white-space: pre-wrap; word-wrap: break-word; -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-inside: auto; margin: 8px 0; padding: 10px; } .code-block * { color: #333 !important; } .flowchart { page-break-inside: avoid; break-inside: avoid; border: 1px dashed #999; padding: 15px; margin: 10px 0; } .uji-formatif-section { background: #f5f5f5 !important; border: 2px solid #000; page-break-inside: avoid; padding: 20px; margin: 15px 0; } .uji-formatif-title, .uji-formatif-desc, .uji-formatif-badge, .uji-feature, .uji-formatif-note { color: #000 !important; } .btn-uji-formatif { background: #000 !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; display: inline-block; padding: 10px 20px; border: 1px solid #000; } footer { background: #1a1a2e !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-before: avoid; margin-top: 20px; padding: 15px 0; } footer h4, footer p { color: #fff !important; font-size: 9pt; } @page { size: A4; margin: 1.5cm 1.2cm; } @page :first { margin-top: 1cm; } li { page-break-inside: avoid; break-inside: avoid; } a[href]:after { content: none !important; } }
+    </style>
+</head>
+<body>
+<div class="top-bar">
+    <div class="logo"><a href="index.html">← Kembali ke Beranda</a><span style="opacity: 0.3;">|</span><span>📘 INFORMATIKA KELAS XII</span></div>
+    <div class="nav-links"><span class="meeting-indicator">PERTEMUAN 03 / 16</span><a href="#materi">Materi</a><a href="#latihan">Latihan</a><a href="#uji-formatif">Uji Formatif</a><a href="#tugas">Tugas</a></div>
+</div>
+
+<section class="page-hero">
+    <div class="page-hero-content">
+        <div class="breadcrumb"><a href="index.html">Beranda</a><span>›</span><span>Bagian 1: Konsep Dasar Algoritma</span><span>›</span><span>Pertemuan 03</span></div>
+        <span class="meeting-number">Pertemuan 03</span>
+        <h1>Cara Menyajikan <span>Algoritma</span></h1>
+        <p class="subtitle">Mempelajari tiga metode utama menyajikan algoritma: teks deskripsi, bagan alir (flowchart), dan pseudokode — beserta simbol standar dan penerapannya.</p>
+        <div class="meta-info">
+            <div class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>2 × 45 Menit</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span>Bagian 1C</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg><span>Kurikulum Merdeka</span></div>
+        </div>
+    </div>
+</section>
+
+<div class="main-content">
+    <div class="objectives">
+        <h4>🎯 Tujuan Pembelajaran</h4>
+        <ul>
+            <li>Siswa mampu menjelaskan tiga metode penyajian algoritma: teks deskripsi, flowchart, dan pseudokode</li>
+            <li>Siswa mampu mengidentifikasi simbol-simbol standar dalam flowchart</li>
+            <li>Siswa mampu menyajikan algoritma sederhana dalam bentuk teks deskripsi</li>
+            <li>Siswa mampu menyajikan algoritma sederhana dalam bentuk pseudokode</li>
+            <li>Siswa mampu membandingkan kelebihan dan kekurangan masing-masing metode</li>
+            <li>Siswa mampu mengaitkan penyajian algoritma dengan nilai karakter ketelitian dan kreativitas</li>
+        </ul>
+    </div>
+
+    <div class="content-block">
+        <h2>A. Tiga Metode Penyajian Algoritma</h2>
+        <p>Algoritma yang telah dirancang perlu disajikan agar dapat dipahami oleh orang lain. Terdapat tiga metode utama yang umum digunakan dalam dunia informatika:</p>
+        <table class="comparison-table">
+            <thead><tr><th>Metode</th><th>Bentuk</th><th>Kelebihan</th><th>Kekurangan</th><th>Kapan Digunakan</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Teks Deskripsi</strong></td><td>Kalimat bahasa alami (Indonesia/Inggris) yang terstruktur</td><td>Mudah dipahami semua orang, tidak perlu keahlian khusus</td><td>Bisa ambigu untuk masalah kompleks, panjang</td><td>Dokumentasi awal, penjelasan untuk non-programmer</td></tr>
+                <tr><td><strong>Bagan Alir (Flowchart)</strong></td><td>Diagram dengan simbol standar ISO/ANSI</td><td>Visual, mudah melihat alur logika, universal</td><td>Makan tempat untuk algoritma panjang, sulit dimodifikasi</td><td>Presentasi, analisis sistem, dokumentasi teknis</td></tr>
+                <tr><td><strong>Pseudokode</strong></td><td>Campuran bahasa alami dan struktur pemrograman</td><td>Dekat dengan kode nyata, ringkas, mudah dikonversi</td><td>Butuh pemahaman dasar pemrograman</td><td>Perancangan sebelum coding, kompetisi programming</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="content-block" id="materi">
+        <h2>B. Teks Deskripsi</h2>
+        <h3>1. Pengertian</h3>
+        <p><strong>Teks deskripsi</strong> adalah cara menyajikan algoritma menggunakan kalimat bahasa alami (bahasa Indonesia atau Inggris) yang ditulis secara terstruktur dan berurutan. Metode ini paling mudah dipahami oleh orang awam karena tidak memerlukan simbol khusus.</p>
+        
+        <h3>2. Contoh Teks Deskripsi</h3>
+        <div class="example-box">
+            <h5>💡 Contoh: Algoritma Menentukan Bilangan Ganjil atau Genap</h5>
+            <p><strong>Masalah:</strong> Menentukan apakah sebuah bilangan bulat termasuk ganjil atau genap.</p>
+            <p><strong>Algoritma:</strong></p>
+            <ol>
+                <li>Mulai</li>
+                <li>Masukkan sebuah bilangan bulat, sebut saja <em>bilangan</em></li>
+                <li>Hitung sisa hasil bagi <em>bilangan</em> dengan 2</li>
+                <li>Jika sisa bagi sama dengan 0, maka tampilkan "Bilangan Genap"</li>
+                <li>Jika sisa bagi tidak sama dengan 0, maka tampilkan "Bilangan Ganjil"</li>
+                <li>Selesai</li>
+            </ol>
+        </div>
+
+        <h3>3. Kelebihan dan Kekurangan</h3>
+        <ul>
+            <li><strong>Kelebihan:</strong> Mudah ditulis, mudah dibaca oleh siapa saja, tidak perlu mempelajari simbol khusus.</li>
+            <li><strong>Kekurangan:</strong> Sulit menggambarkan percabangan (kondisi if-else) yang kompleks, rentan ambigu jika kalimat tidak spesifik.</li>
+        </ul>
+    </div>
+
+    <div class="content-block">
+        <h2>C. Bagan Alir (Flowchart)</h2>
+        <h3>1. Pengertian</h3>
+        <p><strong>Flowchart</strong> (bagan alir) adalah representasi visual dari algoritma menggunakan simbol-simbol grafis standar yang dihubungkan dengan anak panah untuk menunjukkan urutan proses. Flowchart sangat efektif untuk menggambarkan alur logika secara visual.</p>
+
+        <h3>2. Simbol Standar Flowchart</h3>
+        <table class="comparison-table">
+            <thead><tr><th>Simbol</th><th>Nama</th><th>Fungsi</th><th>Bentuk Visual</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Oval</strong></td><td>Terminal</td><td>Menunjukkan Mulai (Start) atau Selesai (End)</td><td>⬭ Bentuk lonjong</td></tr>
+                <tr><td><strong>Persegi Panjang</strong></td><td>Process</td><td>Menunjukkan proses perhitungan atau operasi</td><td>▭ Kotak empat persegi</td></tr>
+                <tr><td><strong>Belah Ketupat</strong></td><td>Decision</td><td>Menunjukkan keputusan/percabangan (Ya/Tidak)</td><td>◇ Bentuk wajik</td></tr>
+                <tr><td><strong>Jajar Genjang</strong></td><td>Input/Output</td><td>Menunjukkan proses input data atau output hasil</td><td>▱ Bentuk miring</td></tr>
+                <tr><td><strong>Panah</strong></td><td>Flow Line</td><td>Menunjukkan arah aliran proses</td><td>→ Garis berujung panah</td></tr>
+            </tbody>
+        </table>
+
+        <h3>3. Contoh Flowchart</h3>
+        <div class="flowchart">
+            <div style="margin-bottom: 20px;"><span class="flow-step flow-start">MULAI</span></div>
+            <div style="margin-bottom: 20px;"><span class="flow-step flow-process">INPUT: bilangan</span></div>
+            <div style="margin-bottom: 20px;"><span class="flow-step flow-decision">bilangan % 2 == 0?</span></div>
+            <div style="margin-bottom: 20px;">
+                <span class="flow-step flow-process" style="background: rgba(46,204,113,0.15); color: #27ae60; border-color: #27ae60;">YA → OUTPUT "Genap"</span>
+                <span class="flow-arrow">|</span>
+                <span class="flow-step flow-process" style="background: rgba(233,69,96,0.1); color: var(--highlight); border-color: var(--highlight);">TIDAK → OUTPUT "Ganjil"</span>
+            </div>
+            <div><span class="flow-step flow-end">SELESAI</span></div>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-light); text-align: center;">Simbol: <span style="color: var(--accent);">● Oval</span> = Mulai/Selesai | <span style="color: var(--accent);">▭ Persegi</span> = Proses | <span style="color: #b8860b;">◇ Belah Ketupat</span> = Keputusan</p>
+    </div>
+
+    <div class="content-block">
+        <h2>D. Pseudokode</h2>
+        <h3>1. Pengertian</h3>
+        <p><strong>Pseudokode</strong> (<em>pseudocode</em>) adalah cara menulis algoritma yang menyerupai struktur bahasa pemrograman (seperti Python, C++, atau Java) namun menggunakan bahasa manusia yang mudah dibaca. Pseudokode tidak terikat pada sintaks bahasa pemrograman tertentu.</p>
+
+        <h3>2. Kata Kunci Umum dalam Pseudokode</h3>
+        <ul>
+            <li><strong>MULAI / SELESAI</strong> → Menandai awal dan akhir algoritma</li>
+            <li><strong>INPUT / BACA</strong> → Menerima masukan dari pengguna</li>
+            <li><strong>OUTPUT / TAMPILKAN</strong> → Menampilkan hasil ke pengguna</li>
+            <li><strong>JIKA ... MAKA ... LAINNYA ... AKHIR JIKA</strong> → Percabangan/kondisi</li>
+            <li><strong>UNTUK ... LAKUKAN ... AKHIR UNTUK</strong> → Perulangan</li>
+        </ul>
+
+        <h3>3. Contoh Pseudokode</h3>
+        <div class="code-block">
+<span class="comment">// Algoritma Menentukan Bilangan Ganjil atau Genap</span>
+<span class="keyword">MULAI</span>
+    <span class="keyword">INPUT</span> bilangan
+    <span class="keyword">JIKA</span> bilangan MOD 2 == 0 <span class="keyword">MAKA</span>
+        <span class="keyword">TAMPILKAN</span> <span class="string">"Bilangan Genap"</span>
+    <span class="keyword">LAINNYA</span>
+        <span class="keyword">TAMPILKAN</span> <span class="string">"Bilangan Ganjil"</span>
+    <span class="keyword">AKHIR JIKA</span>
+<span class="keyword">SELESAI</span>
+        </div>
+    </div>
+
+    <div class="content-block">
+        <h2>E. Nilai Karakter dalam Menyajikan Algoritma</h2>
+        <div class="value-box">
+            <h5>🌿 Ketelitian, Kreativitas, dan Komunikasi</h5>
+            <p>Menyajikan algoritma melatih tiga nilai karakter penting:</p>
+            <ul>
+                <li><strong>Ketelitian:</strong> Terutama saat menggambar flowchart. Satu simbol yang salah dapat mengubah seluruh makna algoritma.</li>
+                <li><strong>Kreativitas:</strong> Dalam menulis pseudokode yang efisien dan mudah dibaca.</li>
+                <li><strong>Komunikasi:</strong> Dalam menulis teks deskripsi yang jelas agar dipahami orang lain.</li>
+            </ul>
+        </div>
+        <div class="quote-box">
+            <p>Sesungguhnya Allah menyukai orang yang apabila bekerja, ia melakukannya dengan itqan (tekun, teliti, dan sempurna).</p>
+            <cite>— HR. Baihaqi</cite>
+        </div>
+        <p>Hadits ini mengingatkan kita bahwa menyajikan algoritma — baik dalam bentuk teks, flowchart, maupun pseudokode — harus dilakukan dengan teliti dan sempurna. Ketelitian dalam menyusun simbol flowchart atau memilih kata dalam pseudokode mencerminkan adab seorang penuntut ilmu.</p>
+    </div>
+
+    <div class="content-block">
+        <div class="summary-box">
+            <h4>📌 Rangkuman Pertemuan 03</h4>
+            <ul>
+                <li>Tiga metode penyajian algoritma: Teks Deskripsi, Flowchart, Pseudokode</li>
+                <li>Teks deskripsi menggunakan bahasa alami, mudah dipahami orang awam</li>
+                <li>Flowchart menggunakan simbol grafis standar (Oval, Persegi, Belah Ketupat, Jajar Genjang)</li>
+                <li>Pseudokode menyerupai bahasa pemrograman namun tetap mudah dibaca manusia</li>
+                <li>Simbol Oval untuk Mulai/Selesai, Belah Ketupat untuk Keputusan/Percabangan</li>
+                <li>Menyajikan algoritma melatih ketelitian, kreativitas, dan kemampuan komunikasi</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="uji-formatif-section" id="uji-formatif">
+        <div class="uji-formatif-content">
+            <span class="uji-formatif-badge">Evaluasi Pembelajaran</span>
+            <div class="uji-formatif-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            </div>
+            <h3 class="uji-formatif-title">Uji <span>Formatif</span> Pertemuan 03</h3>
+            <p class="uji-formatif-desc">Ukur pemahamanmu tentang <strong>Cara Menyajikan Algoritma</strong> melalui uji formatif interaktif. Jawab dengan jujur untuk mengetahui penguasaanmu terhadap teks deskripsi, flowchart, dan pseudokode.</p>
+            <div class="uji-formatif-features">
+                <div class="uji-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span>10 Soal</span></div>
+                <div class="uji-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>± 15 Menit</span></div>
+                <div class="uji-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span>Skor Otomatis</span></div>
+                <div class="uji-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg><span>Umpan Balik</span></div>
+            </div>
+            <a href="uji-formatif-3.html" class="btn-uji-formatif" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                Mulai Uji Formatif
+            </a>
+            <p class="uji-formatif-note">💡 <em>Tips: Pahami kembali simbol-simbol flowchart dan kata kunci pseudokode sebelum memulai. Bismillah, semoga sukses!</em></p>
+        </div>
+    </div>
+
+    <div class="content-block" id="latihan">
+        <h2>F. Latihan Pemahaman</h2>
+        <div class="quiz-box">
+            <h5>📝 Soal Pilihan Ganda</h5>
+            <div class="quiz-question"><p>1. Metode penyajian algoritma yang paling mudah dipahami oleh orang awam adalah...</p><ul class="quiz-options"><li data-label="A">Pseudokode</li><li data-label="B">Flowchart</li><li data-label="C">Teks Deskripsi</li><li data-label="D">Diagram Blok</li></ul></div>
+            <div class="quiz-question"><p>2. Simbol oval (⬭) dalam flowchart digunakan untuk menunjukkan...</p><ul class="quiz-options"><li data-label="A">Proses perhitungan</li><li data-label="B">Keputusan/percabangan</li><li data-label="C">Input/Output</li><li data-label="D">Mulai/Selesai</li></ul></div>
+            <div class="quiz-question"><p>3. Simbol belah ketupat (◇) dalam flowchart menunjukkan...</p><ul class="quiz-options"><li data-label="A">Mulai/Selesai</li><li data-label="B">Proses</li><li data-label="C">Keputusan/Percabangan</li><li data-label="D">Input/Output</li></ul></div>
+            <div class="quiz-question"><p>4. Berikut ini yang merupakan kata kunci pseudokode untuk percabangan adalah...</p><ul class="quiz-options"><li data-label="A">MULAI dan SELESAI</li><li data-label="B">JIKA, MAKA, LAINNYA</li><li data-label="C">INPUT dan OUTPUT</li><li data-label="D">UNTUK dan LAKUKAN</li></ul></div>
+            <div class="quiz-question"><p>5. Kekurangan utama dari flowchart adalah...</p><ul class="quiz-options"><li data-label="A">Sulit dipahami visualnya</li><li data-label="B">Memakan banyak tempat untuk algoritma panjang</li><li data-label="C">Tidak memiliki simbol standar</li><li data-label="D">Hanya bisa digunakan oleh programmer</li></ul></div>
+        </div>
+        <div class="quiz-box">
+            <h5>📝 Soal Esai</h5>
+            <div class="quiz-question"><p>1. Jelaskan perbedaan antara teks deskripsi, flowchart, dan pseudokode!</p></div>
+            <div class="quiz-question"><p>2. Sebutkan minimal 4 simbol standar dalam flowchart beserta fungsinya!</p></div>
+            <div class="quiz-question"><p>3. Buatlah teks deskripsi untuk algoritma "Menentukan lulus atau tidaknya seorang siswa berdasarkan nilai (minimal 75)"!</p></div>
+            <div class="quiz-question"><p>4. Tuliskan pseudokode untuk algoritma "Menghitung luas persegi panjang (panjang × lebar)"!</p></div>
+            <div class="quiz-question"><p>5. Mengapa ketelitian sangat penting saat menggambar flowchart? Hubungkan dengan nilai karakter Islami!</p></div>
+        </div>
+    </div>
+
+    <div class="content-block" id="tugas">
+        <h2>G. Tugas Praktik</h2>
+        <div class="task-box">
+            <h5>📋 Tugas Individu (Dikumpulkan Pertemuan Berikutnya)</h5>
+            <ol>
+                <li>Pilih 1 masalah sederhana (misal: menentukan diskon belanja, menghitung nilai rata-rata). Sajikan algoritmanya dalam <strong>3 bentuk sekaligus</strong>: teks deskripsi, flowchart (gambar di kertas A4 atau draw.io), dan pseudokode!</li>
+                <li>Buatlah <strong>poster mini</strong> yang menjelaskan 5 simbol standar flowchart beserta fungsinya. Gunakan warna yang menarik dan tempelkan di meja belajar!</li>
+                <li>Coba konversi pseudokode berikut menjadi teks deskripsi: <em>"JIKA hujan MAKA bawa payung LAINNYA pakai topi"</em>. Jelaskan mengapa konversi ini penting!</li>
+                <li>Refleksi: Tuliskan 1 paragraf tentang bagaimana ketelitian dalam menggambar flowchart dapat melatih karakter seorang Muslim dalam beribadah!</li>
+            </ol>
+        </div>
+        <div class="task-box" style="border-color: var(--gold); background: linear-gradient(135deg, #fff8f0, #fff3e6);">
+            <h5 style="color: #b8860b;">⭐ Tugas Tambahan (Bonus Nilai)</h5>
+            <ol>
+                <li>Gunakan aplikasi <strong>draw.io</strong> (gratis) untuk membuat flowchart digital dari algoritma "Proses Pendaftaran Siswa Baru di Madrasah". Simpan sebagai PNG dan kumpulkan!</li>
+                <li>Coba pelajari 1 bahasa pemrograman dasar (misal: Python) dan bandingkan sintaksnya dengan pseudokode yang telah kamu pelajari. Tuliskan 3 persamaan dan 3 perbedaannya!</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="content-block">
+        <h2>📚 Referensi Pertemuan 03</h2>
+        <ul>
+            <li>Knuth, D. E. (1997). <em>The Art of Computer Programming, Volume 1: Fundamental Algorithms</em> (3rd Edition). Addison-Wesley.</li>
+            <li>Munir, R. (2024). <em>Algoritma dan Pemrograman: Konsep Dasar dan Implementasi</em> (Edisi ke-3). Bandung: Informatika Bandung.</li>
+            <li>ISO 5807:1985. <em>Information processing — Documentation symbols and conventions for data, program and system flowcharts</em>. International Organization for Standardization.</li>
+            <li>Kemendikbudristek RI. (2024). <em>Informatika untuk SMA/MA Kelas XII</em>. Jakarta: Pusat Kurikulum dan Perbukuan.</li>
+            <li>Cormen, T. H. et al. (2022). <em>Introduction to Algorithms</em> (4th Edition). MIT Press.</li>
+        </ul>
+    </div>
+
+    <div class="meeting-nav">
+        <a href="2.html" class="nav-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <div><div class="nav-label">Kembali</div><div class="nav-title">Pertemuan 02: Berpikir Komputasional</div></div>
+        </a>
+        <a href="4.html" class="nav-btn next">
+            <div><div class="nav-label">Selanjutnya</div><div class="nav-title">Pertemuan 04: Pengenalan Web & HTML</div></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
+</div>
+
+<footer>
+    <h4>MAS DINIYAH LIMO JURAI</h4>
+    <p>Jln. Raya Sungai Pua, Kabupaten Agam, Sumatera Barat</p>
+    <p style="margin-top: 12px; font-size: 0.8rem; opacity: 0.6;">© 2026 — Buku Informatika Kelas XII oleh JEFRI, S.Pd<br><em>"Menuntut ilmu adalah ibadah, menyebarkannya adalah sedekah."</em></p>
+</footer>
+
+<button class="print-button" onclick="window.print()" title="Cetak atau Simpan sebagai PDF">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+    Cetak PDF
+</button>
+</body>
+</html>
